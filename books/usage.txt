@@ -27,12 +27,16 @@ DESCRIPTION
 EXAMPLES
       Returns a list of authors with the letter "m" in their name and a list of each author's books.
             python3 books.py -a m
+            
       Returns a list of books whose titles contains "m".
             python3 books.py -t m
+            
       Returns a list of books published between 1851 to 1920.
             python3 books.py -y 1851,1920
+            
       Returns the usage statement
             python3 books.py -h      
+            
       Invalid input returns usage statement
             python3 books.py -m
             python3 books.py -y m
