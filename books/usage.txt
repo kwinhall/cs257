@@ -1,21 +1,40 @@
+Khizar Qureshi & Kendra Winhall
+
 NAME
       books - provides information on book titles, authors, and years published within a dataset of books. 
       
 SYNOPSIS
-      books -a <string>
-      books --author <string>
-      books -t <string>
-      books --title <string>
-      books -y <year1, year2>
-      books --years <year1, year2>
-      books -h
-      books --help
+      python3 books.py -a <string>
+      python3 books.py --author <string>
+      python3 books.py -t <string>
+      python3 books.py --title <string>
+      python3 books.py -y <year1, year2>
+      python3 books.py --years <year1, year2>
+      python3 books.py -h
+      python3 books.py --help
 
 DESCRIPTION
-      books[-a | --author] 
-      books[-t | --title]
-      books[-y | --years]
-      books[-h | --help]
+      Each command requires an argument in order to work. If a string or range of integers is not provided,
+      the program will print the usage statement.
       
+      The following options are available:
 
+      -a | --author     Given a string S, prints a list of authors whose names contain S and a list of each author's books.
+      -t | --title      Given a string S, prints a list of books whose titles contain S.
+      -y | --years      Given a range of years A to B, prints a list of books published between years A and B, inclusive.
+      -h | --help       Prints the usage statement.
+      
+EXAMPLES
+      Returns a list of authors with the letter "m" in their name and a list of each author's books.
+            python3 books.py -a m
+      Returns a list of books whose titles contains "m".
+            python3 books.py -t m
+      Returns a list of books published between 1851 to 1920.
+            python3 books.py -y 1851,1920
+      Returns the usage statement
+            python3 books.py -h      
+      Invalid input returns usage statement
+            python3 books.py -m
+            python3 books.py -y m
+      
       
