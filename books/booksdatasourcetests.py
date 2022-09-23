@@ -1,4 +1,7 @@
 '''
+Names: Khizar Qureshi & Kendra Winhall
+'''
+'''
    booksdatasourcetest.py
    Jeff Ondich, 24 September 2021
 '''
@@ -25,7 +28,24 @@ class BooksDataSourceTester(unittest.TestCase):
         self.assertTrue(books[0].title == 'Emma')
         self.assertTrue(books[1].title == 'Neverwhere')
         self.assertTrue(books[2].title == 'Omoo')
-
+     
+   def test_invalid_book_string(self):
+      self.assertRaises(TypeError, self.data_source.books,?)
+     
+   def test_invalid_author_string(self):
+      self.assertRaises(TypeError, self.data_source.authors,?)
+     
+   def test_invalid_years(self):
+      self.assertRaises(TypeError, self.data_source.books_between_years,forty, two)
+     
+   def test_invalid_year_order(self):
+      self.assertRaises(Error, self.data_source.books_between_years,1940,1840)
+      
+   def test_books_between_years(self):
+      tiny_data_source = BookDataSource('tinybooks.csv')
+      books = tiny_data_source.books()
+      self.assertTrue(books[0].year < books[-1].year)
+                                        
 if __name__ == '__main__':
     unittest.main()
 
