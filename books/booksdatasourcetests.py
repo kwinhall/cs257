@@ -58,38 +58,38 @@ class BooksDataSourceTester(unittest.TestCase):
       
    def test_start_year_none(self):
       tiny_data_source = BooksDataSource('tinybooks.csv')
-      books = tiny_data_source.books_between_years(self, None, 1847)
+      books = tiny_data_source.books_between_years(None, 1847)
       self.assertTrue(books[0].publication_year <= 1847 and books[1].publication_year <= 1847)
     
    def test_end_year_none(self):
       tiny_data_source = BooksDataSource('tinybooks.csv')
-      books = tiny_data_source.books_between_years(self, 1847, None)
+      books = tiny_data_source.books_between_years(1847, None)
       self.assertTrue(books[0].publication_year >= 1847 and books[1].publication_year >= 1847)
       
    def test_books_sort_by_title(self):
       tiny_data_source = BooksDataSource('tinybooks.csv')
-      books = tiny_data_source.books(self, None, 'title')
+      books = tiny_data_source.books(None, 'title')
       self.assertTrue(books[0].title == 'Emma')
       self.assertTrue(books[1].title == 'Neverwhere')
       self.assertTrue(books[2].title == 'Omoo')
      
    def test_books_sort_by_year(self):
       tiny_data_source = BooksDataSource('tinybooks.csv')
-      books = tiny_data_source.books(self, None, 'year')
+      books = tiny_data_source.books(None, 'year')
       self.assertTrue(books[0].title == 'Emma')
       self.assertTrue(books[1].title == 'Omoo')
       self.assertTrue(books[2].title == 'Neverwhere')         
       
    def test_books_search(self):
       tiny_data_source = BooksDataSource('tinybooks.csv')
-      books = tiny_data_source.books(self, 'e')
+      books = tiny_data_source.books('e')
       self.assertEquals(len(books), 2)
       self.assertTrue(books[0].title == 'Emma')
       self.assertTrue(books[1].title == 'Neverwhere')
       
    def test_authors_search(self):
       tiny_data_source = BooksDataSource('tinybooks.csv')
-      authors = tiny_data_source.authors(self, 'l')
+      authors = tiny_data_source.authors('l')
       self.assertEquals(len(authors), 2)
       self.assertTrue(authors[0] == Author('Gaiman', 'Neil'))
       self.assertTrue(authors[1] == Author('Melville', 'Herman'))
