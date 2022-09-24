@@ -29,13 +29,13 @@ class BooksDataSourceTester(unittest.TestCase):
       self.assertTrue(books[2].title == 'Omoo')
 
    def test_invalid_book_string(self):
-      self.assertRaises(TypeError, self.data_source.books,'?')
+      self.assertRaises(TypeError, self.data_source.books(1))
      
    def test_invalid_author_string(self):
-      self.assertRaises(TypeError, self.data_source.authors,'?')
+      self.assertRaises(TypeError, self.data_source.authors(1))
      
    def test_invalid_years(self):
-      self.assertRaises(TypeError, self.data_source.books_between_years, 'forty', 'two')
+      self.assertRaises(TypeError, self.data_source.books_between_years('forty', 'two'))
      
    def test_invalid_year_order(self):
       self.assertRaises(ValueError, self.data_source.books_between_years, 1940, 1840)
@@ -68,28 +68,28 @@ class BooksDataSourceTester(unittest.TestCase):
       
    def test_books_sort_by_title(self):
       tiny_data_source = BooksDataSource('tinybooks.csv')
-      books = tiny_data_source.books(self, search_text = None, sort_by = 'title')
+      books = tiny_data_source.books(self, None, 'title')
       self.assertTrue(books[0].title == 'Emma')
       self.assertTrue(books[1].title == 'Neverwhere')
       self.assertTrue(books[2].title == 'Omoo')
      
    def test_books_sort_by_year(self):
       tiny_data_source = BooksDataSource('tinybooks.csv')
-      books = tiny_data_source.books(self, search_text = None, sort_by = 'year')
+      books = tiny_data_source.books(self, None, 'year')
       self.assertTrue(books[0].title == 'Emma')
       self.assertTrue(books[1].title == 'Omoo')
       self.assertTrue(books[2].title == 'Neverwhere')         
       
    def test_books_search(self):
       tiny_data_source = BooksDataSource('tinybooks.csv')
-      books = tiny_data_source.books(self, search_text = 'e')
-      #self.assertEquals(len(books), 2)
+      books = tiny_data_source.books(self, 'e')
+      self.assertEquals(len(books), 2)
       self.assertTrue(books[0].title == 'Emma')
       self.assertTrue(books[1].title == 'Neverwhere')
       
    def test_authors_search(self):
       tiny_data_source = BooksDataSource('tinybooks.csv')
-      authors = tiny_data_source.authors(self, search_text = 'l')
+      authors = tiny_data_source.authors(self, 'l')
       self.assertEquals(len(authors), 2)
       self.assertTrue(authors[0] == Author('Gaiman', 'Neil'))
       self.assertTrue(authors[1] == Author('Melville', 'Herman'))
