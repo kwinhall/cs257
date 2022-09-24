@@ -1,6 +1,6 @@
 '''
    Names: Khizar Qureshi & Kendra Winhall
-   booksdatasourcetest.py
+   booksdatasourcetests.py
    modified from Jeff Ondich, 24 September 2021
 '''
 
