@@ -36,6 +36,26 @@ class Book:
 
 class BooksDataSource:
     def __init__(self, books_csv_file_name):
+
+        file = open(books_csv_file_name)
+
+        for column in file: 
+            fields = column.split(",")
+            '''
+            ## split column 2 by spaces
+            ##if column 2 has 3 : then element 0, 1, 2 are first name, last name, years
+            ## if column 2 has 4 : then element 0, 1, 2, 3, are first name, first name, last name, years
+            parse years
+            check if author already exists
+            instantiate auhtor object - new author = author(surname, given name, year1, year2)
+            ##bookInfo = Book(column[0], column[1], author)
+            check if book already exists
+            ## instantiate new book object
+            ## new book = 
+            title, publication_year, author = column[0], column[1], column[2]
+            ordering lists of both books and authors
+
+'''
         ''' The books CSV file format looks like this:
 
                 title,publication_year,author_description
