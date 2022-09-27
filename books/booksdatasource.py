@@ -64,6 +64,7 @@ class BooksDataSource:
             fields = column.split(",")
             if len(fields) == 3:
                 title = fields[0]
+                print(title)
                 publication_year = fields[1]
                 author_description = fields[2]
                 author_fields = author_description.split(" ")
@@ -99,20 +100,20 @@ class BooksDataSource:
                         death_year = None
                         
                 elif len(author_fields) == 7:
-                    given_name_1 = author_fields[0]
-                    surname_1 = author_fields[1]
-                    authors_lifespan_1 = author_fields[2]
-                    authors_lifespan_1 = authors_lifespan_1.replace("(", "")
-                    authors_lifespan_1 = authors_lifespan_1.replace(")", "")
-                    years_fields_1 = author_fields.split("-")
+                    given_name = author_fields[0]
+                    surname = author_fields[1]
+                    authors_lifespan = author_fields[2]
+                    authors_lifespan = authors_lifespan.replace("(", "")
+                    authors_lifespan = authors_lifespan.replace(")", "")
+                    years_fields = authors_lifespan.split("-")
                     
-                    if len(years_fields_1) == 2:
-                        birth_year_1 = years_fields_1[0]
-                        death_year_1 = years_fields_1[1]
+                    if len(years_fields) == 2:
+                        birth_year = years_fields[0]
+                        death_year = years_fields[1]
                         
                     else:
-                        birth_year_1 = years_fields_1[0]
-                        death_year_1 = None
+                        birth_year = years_fields[0]
+                        death_year = None
                     
                     given_name_2 = author_fields[4]
                     surname_2 = author_fields[5]
@@ -144,7 +145,7 @@ class BooksDataSource:
                     authors_lifespan = author_fields[2]
                     authors_lifespan = authors_lifespan.replace("(", "")
                     authors_lifespan = authors_lifespan.replace(")", "")
-                    years_fields = author_fields.split("-")
+                    years_fields = authors_lifespan.split("-")
                     if len(years_fields) == 2:
                         birth_year = years_fields[0]
                         death_year = years_fields[1]
@@ -206,55 +207,58 @@ class BooksDataSource:
             else:
                 print("error")
                 
-        author_is_in_list = False
-        for i in range (len(author_list)-1):
-            if author_list[i].given_name != given_name or author_list[i].surname != surname:
-                i += 1
-            else:
-                author_is_in_list = True
-                break
-        if two_authors:
-            author_2_is_in_list = False
+            author_is_in_list = False
             for i in range (len(author_list)-1):
-                if author_list[i].given_name != given_name_2 or author_list[i].surname != surname_2:
+                if author_list[i].given_name != given_name or author_list[i].surname != surname:
                     i += 1
                 else:
-                    author_2_is_in_list = True
+                    author_is_in_list = True
                     break
-            
-        if not author_is_in_list:
-            new_author = Author(surname, given_name, birth_year, death_year, this_authors_books)
-            author_list.append(new_author)
-        
-        if two_authors == True:
-            if not author_2_is_in_list:
-                new_author_2 = Author(surname_2, given_name_2, birth_year_2, death_year_2, this_authors_books)
-                author_list.append(new_author_2)
-        
-        this_book_authors = []
-        book_is_in_list = False
-
-        for i in range (len(book_list)-1):
-            if book_list[i].title != title:
-                i += 1
-            else:
-                book_is_in_list = True
-                break
-            
-        if not book_is_in_list:
-            this_book_authors.append(new_author)
             if two_authors:
-                this_book_authors.append(new_author_2)
-                new_book = Book(title, publication_year, this_book_authors)
-                this_authors_books.append(new_book)
-                this_authors_2_books.append(new_book)
-                book_list.append(new_book)
-            else:
-                new_book = Book(title, publication_year, this_book_authors)
-                this_authors_books.append(new_book)
-                book_list.append(new_book)             
-             
+                author_2_is_in_list = False
+                for i in range (len(author_list)-1):
+                    if author_list[i].given_name != given_name_2 or author_list[i].surname != surname_2:
+                        i += 1
+                    else:
+                        author_2_is_in_list = True
+                        break
+            
+            if not author_is_in_list:
+                new_author = Author(surname, given_name, birth_year, death_year, this_authors_books)
+                author_list.append(new_author)
+            
+            if two_authors == True:
+                if not author_2_is_in_list:
+                    new_author_2 = Author(surname_2, given_name_2, birth_year_2, death_year_2, this_authors_books)
+                    author_list.append(new_author_2)
+            
+            this_book_authors = []
+            book_is_in_list = False
+
+            for i in range (len(book_list)-1):
+                if book_list[i].title != title:
+                    i += 1
+                else:
+                    book_is_in_list = True
+                    break
+                
+            if not book_is_in_list:
+                this_book_authors.append(new_author)
+                if two_authors:
+                    this_book_authors.append(new_author_2)
+                    new_book = Book(title, publication_year, this_book_authors)
+                    this_authors_books.append(new_book)
+                    this_authors_2_books.append(new_book)
+                    book_list.append(new_book)
+                else:
+                    new_book = Book(title, publication_year, this_book_authors)
+                    this_authors_books.append(new_book)
+                    book_list.append(new_book)  
+            
+        print(len(author_list))
+        print(len(book_list))
         pass
+
 
     def authors(self, search_text=None):
         ''' Returns a list of all the Author objects in this data source whose names contain
@@ -287,3 +291,11 @@ class BooksDataSource:
             should be included.
         '''
         return []
+def main():
+    books_csv_file_name = "books1.csv"
+    (BooksDataSource(books_csv_file_name))
+    
+
+main()
+     
+       
