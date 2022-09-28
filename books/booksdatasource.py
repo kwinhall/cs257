@@ -21,9 +21,12 @@ class Author:
         ''' For simplicity, we're going to assume that no two authors have the same name. '''
         return self.surname == other.surname and self.given_name == other.given_name
 
-    # For sorting authors, you could add a "def __lt__(self, other)" method
-    # to go along with __eq__ to enable you to use the built-in "sorted" function
-    # to sort a list of Author objects.
+    def __lt__(self, other):
+        if self.surname < other.surname:
+            return True
+        if self.surname == other.surname and self.given_name < other.given_name:
+            return True
+        return False
 
 class Book:
     def __init__(self, title='', publication_year=None, authors=[]):
@@ -38,6 +41,11 @@ class Book:
             no two books have the same title, so "same title" is the same
             thing as "same book". '''
         return self.title == other.title
+
+    def __lt__(self, other):
+        if self.title < other.title:
+            return True
+        return False
 
     # For sorting books, you could add a "def __lt__(self, other)" method
     # to go along with __eq__ to enable you to use the built-in "sorted" function
@@ -265,7 +273,15 @@ class BooksDataSource:
             returns all of the Author objects. In either case, the returned list is sorted
             by surname, breaking ties using given name (e.g. Ann Brontë comes before Charlotte Brontë).
         '''
-        return []
+        sorted_author_list = []
+        if search_text == None:
+            return sorted(self.author_list)
+        
+        else:
+            for author in self.author_list:
+                if search_text.lower() in author.surname.lower() or search_text.lower() in author.given_name.lower():
+                    sorted_author_list.append(author)
+            return sorted(sorted_author_list)
 
     def books(self, search_text=None, sort_by='title'):
         ''' Returns a list of all the Book objects in this data source whose
@@ -277,7 +293,24 @@ class BooksDataSource:
                 default -- same as 'title' (that is, if sort_by is anything other than 'year'
                             or 'title', just do the same thing you would do for 'title')
         '''
-        return []
+        sorted_book_list = []
+        if search_text == None and sort_by != "year":
+            return sorted(self.book_list)
+        
+        elif search_text == None and sort_by == "year":
+            return "he is still working on this lol"
+
+        elif search_text != None and sort_by!="year":
+            for book in self.book_list:
+                if search_text.lower() in book.title.lower():
+                    sorted_book_list.append(book)
+            return sorted(sorted_book_list)
+        
+        else: 
+            for book in self.book_list:
+                if search_text.lower() in book.title.lower():
+                    sorted_book_list.append(book)
+            return "in progress."
 
     def books_between_years(self, start_year=None, end_year=None):
         ''' Returns a list of all the Book objects in this data source whose publication
@@ -291,11 +324,16 @@ class BooksDataSource:
         '''
         return []
 def main():
-    books_csv_file_name = "books2.csv"
+    books_csv_file_name = "books1.csv"
     A = (BooksDataSource(books_csv_file_name))
-    for i in A.book_list:
+    B = A.books(None, "ghvkdfhbv")
+    for i in B:
         print(i.title)
-       
+
+    '''
+    for i in A.author_list:
+        print(i.surname)
+    '''  
 
 main()
      
