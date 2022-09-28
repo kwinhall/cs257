@@ -55,8 +55,8 @@ class BooksDataSource:
             a collection of Author objects and a collection of Book objects.
         '''
         file = open(books_csv_file_name)
-        author_list = []
-        book_list = []
+        self.author_list = []
+        self.book_list = []
         
         for column in file: 
             two_authors = False
@@ -64,7 +64,6 @@ class BooksDataSource:
             fields = column.split(",")
             if len(fields) == 3:
                 title = fields[0]
-                print(title)
                 publication_year = fields[1]
                 author_description = fields[2]
                 author_fields = author_description.split(" ")
@@ -130,7 +129,7 @@ class BooksDataSource:
                         birth_year_2 = years_fields_2[0]
                         death_year_2 = None
                 else:
-                    print("error") 
+                    raise ValueError
                                     
                 
             elif len(fields) == 4:
@@ -203,21 +202,21 @@ class BooksDataSource:
                         birth_year_2 = years_fields_2[0]
                         death_year_2 = None
                 else:
-                    print("error") 
+                    raise ValueError 
             else:
-                print("error")
+                raise ValueError
                 
             author_is_in_list = False
-            for i in range (len(author_list)-1):
-                if author_list[i].given_name != given_name or author_list[i].surname != surname:
+            for i in range (len(self.author_list)):
+                if self.author_list[i].given_name != given_name or self.author_list[i].surname != surname:
                     i += 1
                 else:
                     author_is_in_list = True
                     break
             if two_authors:
                 author_2_is_in_list = False
-                for i in range (len(author_list)-1):
-                    if author_list[i].given_name != given_name_2 or author_list[i].surname != surname_2:
+                for i in range (len(self.author_list)):
+                    if self.author_list[i].given_name != given_name_2 or self.author_list[i].surname != surname_2:
                         i += 1
                     else:
                         author_2_is_in_list = True
@@ -225,18 +224,18 @@ class BooksDataSource:
             
             if not author_is_in_list:
                 new_author = Author(surname, given_name, birth_year, death_year, this_authors_books)
-                author_list.append(new_author)
+                self.author_list.append(new_author)
             
             if two_authors == True:
                 if not author_2_is_in_list:
                     new_author_2 = Author(surname_2, given_name_2, birth_year_2, death_year_2, this_authors_books)
-                    author_list.append(new_author_2)
+                    self.author_list.append(new_author_2)
             
             this_book_authors = []
             book_is_in_list = False
 
-            for i in range (len(book_list)-1):
-                if book_list[i].title != title:
+            for i in range (len(self.book_list)):
+                if self.book_list[i].title != title:
                     i += 1
                 else:
                     book_is_in_list = True
@@ -249,14 +248,14 @@ class BooksDataSource:
                     new_book = Book(title, publication_year, this_book_authors)
                     this_authors_books.append(new_book)
                     this_authors_2_books.append(new_book)
-                    book_list.append(new_book)
+                    self.book_list.append(new_book)
                 else:
                     new_book = Book(title, publication_year, this_book_authors)
                     this_authors_books.append(new_book)
-                    book_list.append(new_book)  
+                    self.book_list.append(new_book)  
             
-        print(len(author_list))
-        print(len(book_list))
+        print(len(self.author_list))
+        print(len(self.book_list))
         pass
 
 
@@ -292,9 +291,11 @@ class BooksDataSource:
         '''
         return []
 def main():
-    books_csv_file_name = "books1.csv"
-    (BooksDataSource(books_csv_file_name))
-    
+    books_csv_file_name = "books2.csv"
+    A = (BooksDataSource(books_csv_file_name))
+    for i in A.book_list:
+        print(i.title)
+       
 
 main()
      
