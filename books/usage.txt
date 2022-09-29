@@ -4,14 +4,14 @@ NAME
       books - provides information on book titles, authors, and years published within a dataset of books. 
       
 SYNOPSIS
-      python3 books.py -a <string>
-      python3 books.py --author <string>
-      python3 books.py -t <string>
-      python3 books.py --title <string>
-      python3 books.py -y <year1, year2>
-      python3 books.py --years <year1, year2>
-      python3 books.py -h
-      python3 books.py --help
+      python3 books.py a [search string]
+      python3 books.py author [search string]
+      python3 books.py t [search string] [title | t | year | y]
+      python3 books.py title [search string] [title | t | year | y]
+      python3 books.py y [start year] [end year]
+      python3 books.py years [start year] [end year]
+      python3 books.py h
+      python3 books.py help
 
 DESCRIPTION
       Each command requires an argument in order to work. If a string or range of integers is not provided,
@@ -19,26 +19,29 @@ DESCRIPTION
       
       The following options are available:
 
-      -a | --author     Given a string S, prints a list of authors whose names contain S and a list of each author's books.
-      -t | --title      Given a string S, prints a list of books whose titles contain S.
-      -y | --years      Given a range of years A to B, prints a list of books published between years A and B, inclusive.
-      -h | --help       Prints the usage statement.
+      a | author     Given a string S, prints a list of authors whose names contain S and a list of each author's books. If no string is given, prints all authors with all their books.
+      t | title      Given a string S, prints a list of books whose titles contain S. If no string is given, prints al books. Can be sorted by title or publication year (by default, it is sorted by title).
+      y | years      Given a range of years A to B, prints a list of books published between years A and B, inclusive. If no years are given, prints a list of all books in the list.
+      h | help       Prints the usage statement.
       
 EXAMPLES
       Returns a list of authors with the letter "m" in their name and a list of each author's books.
-            python3 books.py -a m
-            
+            python3 books.py a m
+
       Returns a list of books whose titles contains "m".
-            python3 books.py -t m
+            python3 books.py t m
+            
+      Returns a list of books whose titles contains "m", sorted by year.
+            python3 books.py t m y
             
       Returns a list of books published between 1851 to 1920.
-            python3 books.py -y 1851,1920
+            python3 books.py y 1851,1920
             
       Returns the usage statement
-            python3 books.py -h      
+            python3 books.py h      
             
       Invalid input returns usage statement
-            python3 books.py -m
-            python3 books.py -y m
+            python3 books.py m
+            python3 books.py y m
       
       

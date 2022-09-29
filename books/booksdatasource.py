@@ -262,8 +262,6 @@ class BooksDataSource:
                     this_authors_books.append(new_book)
                     self.book_list.append(new_book)  
             
-        print(len(self.author_list))
-        print(len(self.book_list))
         pass
 
 
@@ -323,18 +321,5 @@ class BooksDataSource:
             should be included.
         '''
         return []
-def main():
-    books_csv_file_name = "books1.csv"
-    A = (BooksDataSource(books_csv_file_name))
-    B = A.books(None, "ghvkdfhbv")
-    for i in B:
-        print(i.title)
-
-    '''
-    for i in A.author_list:
-        print(i.surname)
-    '''  
-
-main()
      
        
