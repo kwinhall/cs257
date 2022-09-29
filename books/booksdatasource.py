@@ -66,15 +66,20 @@ class BooksDataSource:
         self.author_list = []
         self.book_list = []
         
-        for column in file: 
+        #traverse through the file
+        for line in file: 
             two_authors = False
             this_authors_books = []
-            fields = column.split(",")
+            fields = line.split(",")
+
+            # if the book does not have a comma inside of the title
             if len(fields) == 3:
                 title = fields[0]
                 publication_year = fields[1]
                 author_description = fields[2]
                 author_fields = author_description.split(" ")
+
+                # if author just has first and last name
                 if len(author_fields)== 3:
                     given_name = author_fields[0]
                     surname = author_fields[1]
@@ -82,14 +87,18 @@ class BooksDataSource:
                     authors_lifespan = authors_lifespan.replace("(", "")
                     authors_lifespan = authors_lifespan.replace(")", "")
                     years_fields = authors_lifespan.split("-")
+
+                    # if author has passed
                     if len(years_fields) == 2:
                         birth_year = years_fields[0]
                         death_year = years_fields[1]
-                        
+
+                    # if author is alive
                     else:
                         birth_year = years_fields[0]
                         death_year = None
-                        
+
+                # if author has a middle name or two last names
                 elif len(author_fields) == 4:
                     given_name = author_fields[0] 
                     surname = author_fields[1] + "," + author_fields[2]
@@ -97,55 +106,67 @@ class BooksDataSource:
                     authors_lifespan = authors_lifespan.replace("(", "")
                     authors_lifespan = authors_lifespan.replace(")", "")
                     years_fields = authors_lifespan.split("-")
-                    
+
+                    # if author has passed
                     if len(years_fields) == 2:
                         birth_year = years_fields[0]
                         death_year = years_fields[1]
-                        
+
+                    # if author is alive
                     else:
                         birth_year = years_fields[0]
                         death_year = None
-                        
+
+                # if there are two authors
                 elif len(author_fields) == 7:
+
+                    # first author
                     given_name = author_fields[0]
                     surname = author_fields[1]
                     authors_lifespan = author_fields[2]
                     authors_lifespan = authors_lifespan.replace("(", "")
                     authors_lifespan = authors_lifespan.replace(")", "")
                     years_fields = authors_lifespan.split("-")
-                    
+
+                    # if author has passed
                     if len(years_fields) == 2:
                         birth_year = years_fields[0]
                         death_year = years_fields[1]
-                        
+
+                    # if author is alive
                     else:
                         birth_year = years_fields[0]
                         death_year = None
-                    
+
+                    # second author
                     given_name_2 = author_fields[4]
                     surname_2 = author_fields[5]
                     authors_lifespan_2 = author_fields[6]
                     authors_lifespan_2 = authors_lifespan_2.replace("(", "")
                     authors_lifespan_2 = authors_lifespan_2.replace(")", "")
                     years_fields_2 = authors_lifespan_2.split("-")
-                    
+
+                    # if author has not passed
                     if len(years_fields_2) == 2:
                         birth_year_2 = years_fields_2[0]
                         death_year_2 = years_fields_2[1]
-                        
+
+                    # if author is alive
                     else:
                         birth_year_2 = years_fields_2[0]
                         death_year_2 = None
+
                 else:
                     raise ValueError
                                     
-                
+            #if the book has a comma inside of the title
             elif len(fields) == 4:
                 title = fields[0] + ", " + fields[1]
                 publication_year = fields[2]
                 author_description = fields[3]
                 author_fields = author_description.split(" ")
-                
+
+                # if author does not have a middle name or two last names
                 if len(author_fields)== 3:
                     given_name = author_fields[0]
                     surname = author_fields[1]
@@ -153,14 +174,18 @@ class BooksDataSource:
                     authors_lifespan = authors_lifespan.replace("(", "")
                     authors_lifespan = authors_lifespan.replace(")", "")
                     years_fields = authors_lifespan.split("-")
+
+                    # if author has passed
                     if len(years_fields) == 2:
                         birth_year = years_fields[0]
                         death_year = years_fields[1]
-                        
+
+                    # if author is alive   
                     else:
                         birth_year = years_fields[0]
                         death_year = None
-                        
+
+                # if author has a middle name or second last name        
                 elif len(author_fields) == 4:
                     given_name = author_fields[0] 
                     surname = author_fields[1] + "," + author_fields[2]
@@ -168,16 +193,21 @@ class BooksDataSource:
                     authors_lifespan = authors_lifespan.replace("(", "")
                     authors_lifespan = authors_lifespan.replace(")", "")
                     years_fields = authors_lifespan.split("-")
-                    
+
+                    # if author has passed
                     if len(years_fields) == 2:
                         birth_year = years_fields[0]
                         death_year = years_fields[1]
-                        
+
+                    # if author is alive    
                     else:
                         birth_year = years_fields[0]
                         death_year = None
-                        
+
+                # if there are two authors        
                 elif len(author_fields) == 7:
+
+                    # first author
                     two_authors = True
                     this_authors_2_books = []
                     given_name = author_fields[0]
@@ -186,41 +216,49 @@ class BooksDataSource:
                     authors_lifespan = authors_lifespan.replace("(", "")
                     authors_lifespan = authors_lifespan.replace(")", "")
                     years_fields = authors_lifespan.split("-")
-                    
+
+                    #if author has passed
                     if len(years_fields) == 2:
                         birth_year = years_fields[0]
                         death_year = years_fields[1]
-                        
+
+                    # if author is alive    
                     else:
                         birth_year = years_fields[0]
                         death_year = None
-                    
+
+                    # second author
                     given_name_2 = author_fields[4]
                     surname_2 = author_fields[5]
                     authors_lifespan_2 = author_fields[6]
                     authors_lifespan_2 = authors_lifespan_2.replace("(", "")
                     authors_lifespan_2 = authors_lifespan_2.replace(")", "")
                     years_fields_2 = authors_lifespan_2.split("-")
-                    
+
+                    # if author has passed
                     if len(years_fields_2) == 2:
                         birth_year_2 = years_fields_2[0]
                         death_year_2 = years_fields_2[1]
-                        
+
+                    # if author is alive    
                     else:
                         birth_year_2 = years_fields_2[0]
                         death_year_2 = None
+
                 else:
                     raise ValueError 
+
             else:
-                raise ValueError
-                
+                raise ValueError   
             author_is_in_list = False
+            #iterates through the list of Author objects and changes flag to True if the given author already exists in the list
             for i in range (len(self.author_list)):
                 if self.author_list[i].given_name != given_name or self.author_list[i].surname != surname:
                     i += 1
                 else:
                     author_is_in_list = True
                     break
+
             if two_authors:
                 author_2_is_in_list = False
                 for i in range (len(self.author_list)):
@@ -229,7 +267,8 @@ class BooksDataSource:
                     else:
                         author_2_is_in_list = True
                         break
-            
+
+            # creates new Author object
             if not author_is_in_list:
                 new_author = Author(surname, given_name, birth_year, death_year, this_authors_books)
                 self.author_list.append(new_author)
@@ -241,22 +280,23 @@ class BooksDataSource:
             
             this_book_authors = []
             book_is_in_list = False
-
+            #iterates through the list of Book objects and changes flag to True if the given book already exists in the list
             for i in range (len(self.book_list)):
                 if self.book_list[i].title != title:
                     i += 1
                 else:
                     book_is_in_list = True
-                    break
-                
+                    break   
+
             if not book_is_in_list:
-                this_book_authors.append(new_author)
+                this_book_authors.append(new_author) # adds this book's author to this book's list of authors
                 if two_authors:
-                    this_book_authors.append(new_author_2)
-                    new_book = Book(title, publication_year, this_book_authors)
-                    this_authors_books.append(new_book)
-                    this_authors_2_books.append(new_book)
-                    self.book_list.append(new_book)
+                    this_book_authors.append(new_author_2) # adds this book's second author to this book's list of authors
+                    new_book = Book(title, publication_year, this_book_authors) # creates new Book object
+                    this_authors_books.append(new_book) # adds this book to the author's list of books
+                    this_authors_2_books.append(new_book) # adds this book to the second author's list of books
+                    self.book_list.append(new_book) # adds the new Book object to the program's list of all books
+                
                 else:
                     new_book = Book(title, publication_year, this_book_authors)
                     this_authors_books.append(new_book)
@@ -277,7 +317,7 @@ class BooksDataSource:
         
         else:
             for author in self.author_list:
-                if search_text.lower() in author.surname.lower() or search_text.lower() in author.given_name.lower():
+                if search_text.lower() in author.surname.lower() or search_text.lower() in author.given_name.lower(): # makes searching case-insensitive
                     sorted_author_list.append(author)
             return sorted(sorted_author_list)
 
@@ -296,6 +336,7 @@ class BooksDataSource:
             return sorted(self.book_list)
         
         elif (search_text == "-" or search_text == None) and (sort_by == "year" or sort_by == "y"):
+            # insertion sort
             for i in range(1, len(self.book_list)):
                 book_key = (self.book_list[i])
                 k = i-1
@@ -309,14 +350,15 @@ class BooksDataSource:
 
         elif (search_text != "-" and search_text != None) and sort_by!="year":
             for book in self.book_list:
-                if search_text.lower() in book.title.lower():
+                if search_text.lower() in book.title.lower(): # makes searching case-insensitive
                     sorted_book_list.append(book)
             return sorted(sorted_book_list)
         
         else: 
             for book in self.book_list:
-                if search_text.lower() in book.title.lower():
+                if search_text.lower() in book.title.lower(): # makes searching case-insensitive
                     sorted_book_list.append(book)
+            # insertion sort
             for i in range(1, len(sorted_book_list)):
                 book_key = (sorted_book_list[i])
                 k = i-1
@@ -345,6 +387,7 @@ class BooksDataSource:
 
         if start_year == None and end_year == None:
             return year_book_list
+
         elif start_year == "-" and end_year != None:
             for book in year_book_list:
                 if int(book.publication_year) <= int(end_year):
@@ -362,5 +405,3 @@ class BooksDataSource:
                 if int(book.publication_year) >= int(start_year) and  int(book.publication_year) <= int(end_year):
                     sorted_book_list.append(book)
             return sorted_book_list
-     
-       

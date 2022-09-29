@@ -9,6 +9,9 @@ import booksdatasource
 file = open("usage.txt", "r")
 usage_statement = file.read()
 
+'''
+parses through the command line and appends each argument to arguments[]
+'''
 def parse_command_line():
     arguments = []
 
@@ -21,7 +24,9 @@ def parse_command_line():
         print(usage_statement)
         print("Invalid number of arguments, please refer to the usage statement above.")
     
-
+'''
+Calls booksdatasource methods based on command line arguments
+'''
 def main():
     arguments = parse_command_line()
 
@@ -50,6 +55,9 @@ def main():
             for book in filtered_year:
                 print(book.title + " " + book.publication_year)
 
+        elif arguments[1] == "help" or arguments[1] == "h":
+            print(usage_statement)
+
         else:
             print("Invalid command line argument. Please type h or help for usage statement.")       
 
@@ -75,10 +83,13 @@ def main():
                 books_data_source = booksdatasource.BooksDataSource('books1.csv')
                 filtered_year = books_data_source.books_between_years(arguments[2])
                 for book in filtered_year:
-                    print(book.title + " " + book.publication_year)
+                    print(book.title)
             except:
                 print('Invalid start year input, type -h or -help for usage statement')
         
+        elif arguments[1] == "help" or arguments[1] == "h":
+            print(usage_statement)
+
         else:
             print("Invalid command line argument. Please type h or help for usage statement.") 
 
@@ -87,14 +98,14 @@ def main():
             books_data_source = booksdatasource.BooksDataSource('books1.csv')
             filtered_books = books_data_source.books(arguments[2], arguments[3])
             for book in filtered_books:
-                print(book.title + " " + book.publication_year)
+                print(book.title)
 
         elif arguments[1] == "years" or arguments[1] == "y":
             if arguments[2] == None and arguments[3]== None:
                 books_data_source = booksdatasource.BooksDataSource('books1.csv')
                 filtered_year = books_data_source.books_between_years()
                 for book in filtered_year:
-                    print(book.title + " " + book.publication_year)
+                    print(book.title)
 
             elif arguments[2] == "-" and arguments[3] != None:
                 try:
@@ -102,7 +113,7 @@ def main():
                     books_data_source = booksdatasource.BooksDataSource('books1.csv')
                     filtered_year = books_data_source.books_between_years("-",arguments[3])
                     for book in filtered_year:
-                        print(book.title + " " + book.publication_year)
+                        print(book.title)
                 except:
                     print('Invalid end year input, type -h or -help for usage statement')
             else:
@@ -115,9 +126,12 @@ def main():
                     books_data_source = booksdatasource.BooksDataSource('books1.csv')
                     filtered_year = books_data_source.books_between_years(arguments[2], arguments[3])
                     for book in filtered_year:
-                        print(book.title + " " + book.publication_year)
+                        print(book.title)
                 except:
                     print('Invalid years input, type -h or -help for usage statement')
+
+        elif arguments[1] == "help" or arguments[1] == "h":
+            print(usage_statement) 
 
         else:
             print("Invalid command line argument. Please type h or help for usage statement.") 
