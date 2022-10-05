@@ -1,5 +1,6 @@
 '''
    Names: Khizar Qureshi & Kendra Winhall
+   Revised by Khizar Qureshi & Kendra Winhall
    booksdatasourcetests.py
    modified from Jeff Ondich, 24 September 2021
 '''
@@ -34,7 +35,6 @@ class BooksDataSourceTester(unittest.TestCase):
       self.assertTrue(int(books[0].publication_year) <= int(books[1].publication_year))
       self.assertEquals(len(books), 3)
       
-      
    def test_start_year_none(self):
       tiny_data_source = BooksDataSource('tinybooks.csv')
       books = tiny_data_source.books_between_years("-", 1847)
@@ -47,14 +47,14 @@ class BooksDataSourceTester(unittest.TestCase):
       
    def test_books_sort_by_title(self):
       tiny_data_source = BooksDataSource('tinybooks.csv')
-      books = tiny_data_source.books(None, 'title')
+      books = tiny_data_source.books(None, '--title')
       self.assertTrue(books[0].title == 'Emma')
       self.assertTrue(books[1].title == 'Neverwhere')
       self.assertTrue(books[2].title == 'Omoo')
      
    def test_books_sort_by_year(self):
       tiny_data_source = BooksDataSource('tinybooks.csv')
-      books = tiny_data_source.books(None, 'year')
+      books = tiny_data_source.books(None, '--year')
       self.assertTrue(books[0].title == 'Emma')
       self.assertTrue(books[1].title == 'Omoo')
       self.assertTrue(books[2].title == 'Neverwhere')   
@@ -78,8 +78,7 @@ class BooksDataSourceTester(unittest.TestCase):
       authors = tiny_data_source.authors('l')
       self.assertEquals(len(authors), 2)
       self.assertTrue(authors[0] == Author('Gaiman', 'Neil'))
-      self.assertTrue(authors[1] == Author('Melville', 'Herman'))
-       
+      self.assertTrue(authors[1] == Author('Melville', 'Herman'))      
                                         
 if __name__ == '__main__':
     unittest.main()

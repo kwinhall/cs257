@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 '''
     Khizar Qureshi & Kendra Winhall
+    Revised by Khizar Qureshi & Kendra Winhall
     booksdatasource.py
     Jeff Ondich, 21 September 2022
     For use in the "books" assignment at the beginning of Carleton's
@@ -46,10 +47,6 @@ class Book:
         if self.title < other.title:
             return True
         return False
-
-    # For sorting books, you could add a "def __lt__(self, other)" method
-    # to go along with __eq__ to enable you to use the built-in "sorted" function
-    # to sort a list of Book objects.
 
 class BooksDataSource:
     def __init__(self, books_csv_file_name):
@@ -304,7 +301,6 @@ class BooksDataSource:
             
         pass
 
-
     def authors(self, search_text=None):
         ''' Returns a list of all the Author objects in this data source whose names contain
             (case-insensitively) the search text. If search_text is None, then this method
@@ -314,14 +310,14 @@ class BooksDataSource:
         sorted_author_list = []
         if search_text == None:
             return sorted(self.author_list)
-        
+    
         else:
             for author in self.author_list:
                 if search_text.lower() in author.surname.lower() or search_text.lower() in author.given_name.lower(): # makes searching case-insensitive
                     sorted_author_list.append(author)
             return sorted(sorted_author_list)
 
-    def books(self, search_text=None, sort_by='title'):
+    def books(self, search_text=None, sort_by='--title'):
         ''' Returns a list of all the Book objects in this data source whose
             titles contain (case-insensitively) search_text. If search_text is None,
             then this method returns all of the books objects.
@@ -332,23 +328,14 @@ class BooksDataSource:
                             or 'title', just do the same thing you would do for 'title')
         '''
         sorted_book_list = []
-        if (search_text == "-" or search_text == None) and sort_by != "year" and sort_by != "y":
+
+        if (search_text == "-" or search_text == None) and sort_by != "--year" and sort_by != "-y":
             return sorted(self.book_list)
         
-        elif (search_text == "-" or search_text == None) and (sort_by == "year" or sort_by == "y"):
-            # insertion sort
-            for i in range(1, len(self.book_list)):
-                book_key = (self.book_list[i])
-                k = i-1
-                while k>=0 and int(book_key.publication_year) < int(self.book_list[k].publication_year):
-                    self.book_list[k+1] = self.book_list[k]
-                    k-=1
-                self.book_list[k+1] = book_key
-
-            return self.book_list
+        elif (search_text == "-" or search_text == None) and (sort_by == "--year" or sort_by == "-y"):
+            return sorted(self.book_list, key = lambda book: (book.publication_year, book.title))
                     
-
-        elif (search_text != "-" and search_text != None) and sort_by!="year":
+        elif (search_text != "-" and search_text != None) and sort_by!= "--year" and sort_by != "-y":
             for book in self.book_list:
                 if search_text.lower() in book.title.lower(): # makes searching case-insensitive
                     sorted_book_list.append(book)
@@ -358,17 +345,8 @@ class BooksDataSource:
             for book in self.book_list:
                 if search_text.lower() in book.title.lower(): # makes searching case-insensitive
                     sorted_book_list.append(book)
-            # insertion sort
-            for i in range(1, len(sorted_book_list)):
-                book_key = (sorted_book_list[i])
-                k = i-1
-                while k>=0 and int(book_key.publication_year) < int(sorted_book_list[k].publication_year):
-                    sorted_book_list[k+1] = sorted_book_list[k]
-                    k-=1
-                sorted_book_list[k+1] = book_key
-            return(sorted_book_list)
+            return sorted(sorted_book_list, key = lambda book: (book.publication_year, book.title))
             
-
 
     def books_between_years(self, start_year=None, end_year=None):
         ''' Returns a list of all the Book objects in this data source whose publication
@@ -379,10 +357,8 @@ class BooksDataSource:
             should be included. If end_year is None, then any book published after or
             during start_year should be included. If both are None, then all books
             should be included.
-
-        
         '''
-        year_book_list  = self.books(None,'year')
+        year_book_list  = self.books(None,'--year')
         sorted_book_list = []
 
         if start_year == None and end_year == None:
