@@ -1,0 +1,53 @@
+Kendra Winhall
+
+NAME
+
+    olympics - provides information about olympic athletes and NOCs.
+      
+SYNOPSIS
+
+    python3 olympics.py a [medal | noc | region] [search text]
+    python3 olympics.py athlete [medal | noc | region] [search text]
+    
+    python3 olympics.py n [medal | noc] [search text] [--sort | -s] [medal | noc] [--descending | -d ]
+    python3 olympics.py noc [medal | noc] [search text] [--sort | -s] [medal | noc] [--descending | -d ]
+
+    python3 olympics.py -h
+    python3 olympics.py --help
+
+DESCRIPTION
+
+    The options directly after the commands a, athlete, n, and noc are search criteria and search text.
+    If the user chooses to specify search criteria (such as noc), they must also specify search text (such as USA).
+    In the n or noc command, the user can sort by number of medals or alphabetical order of NOCs. 
+    If there is search criteria and search text, the -s or --sort command must come after the search criteria and search text.
+    The program sorts in ascending order by default.
+    The user can sort in descending order after the specifying the sort option and sort category in the n or noc command.
+    If the user inputs -h or --help, the program will print the usage statement.
+      
+    The following options are available:
+
+    a | athlete         Prints a list of Olympic athletes. 
+                        If search criteria and search text are not given, prints all Olympic athletes.
+    n | noc             Prints a list of Olympic NOCs and the number of Olympic medals they have earned. 
+                        If search criteria and search text are not given, prints all NOCs.
+    -s | --sort         After the n or noc command, sorts data by the specified category. 
+                        If not specified, sorts by medal. Data is sorted in ascending order by default.
+    -d | --descending   After the -s or --sort command, sorts data in descending order. 
+                        If absent, data is sorted in ascending order.
+    -h | --help         Prints the usage statement.
+
+EXAMPLES
+
+    Prints the usage statement.
+    python3 olympics.py --help
+
+    Lists the names of all athletes who competed for the USA NOC.
+    python3 olympics.py athlete noc USA
+
+    Lists NOCs and the number of gold medals they have won,
+    in decreasing order of the number of gold medals.
+    python3 olympics.py noc medal gold --sort medal -descending
+
+    Lists the names of all athletes who competed for Japan.
+    python3 olympics.py athlete region Japan
