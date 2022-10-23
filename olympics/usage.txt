@@ -47,7 +47,7 @@ EXAMPLES
 
     Lists NOCs and the number of gold medals they have won,
     in decreasing order of the number of gold medals.
-    python3 olympics.py noc medal gold --sort medal -descending
+    python3 olympics.py noc medal gold --sort medal --descending
 
     Lists the names of all athletes who competed for Japan.
     python3 olympics.py athlete region Japan
