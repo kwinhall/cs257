@@ -1,0 +1,20 @@
+By Khizar Qureshi and Kendra Winhall
+
+This dataset contains over 700 languages spoken in New York City. In the dataset, each language has their original world region, country, number of global speakers, the language’s linguistic family, location in NYC, size of language-speaking community, and status (i.e, residential, community, revival). In order to download the data, go to https://languagemap.nyc/Data and click the export button on the top right.
+
+User stories:
+STORY - A Korean speaker is considering moving to New York City. They want to know where Korean-speaking communities are in and around NYC.
+
+IMPLEMENTATION: The user would type “Korean” into the search bar and the website could output information on where Korean-speaking communities are (such as “Flushing, Queens” and “Palisades Park, New Jersey”) in a table. 
+----------
+STORY: A person interested in social linguistics wanting to study what languages are spoken in specific neighborhoods in NYC. 
+
+IMPLEMENTATION: The user could input a specific region or neighborhood in NYC and get a list of languages spoken in that area sorted alphabetically, alongside the size of the language-speaking community, country of origin, and status. For example, if the user is interested in knowing the languages spoken in Yorkville, they could input Yorkville in a search bar and the website would output a list of languages with its properties ( for ex, Bavarian - Large - Austria/Germany -  Historical … + the other languages) 
+----------
+STORY: A public school county official in New York City is trying to spread awareness of a specific language and its significance in NYC. 
+
+IMPLEMENTATION: The user could select a language and get a list of neighborhoods where it's spoken and the size of the language-speaking community. For example, the official could input Akan, and the website would output the neighborhood and the size of the amount of speakers in that region (for ex, Flatbush - Small) 
+----------
+STORY: A random middle school student who lives in NYC interested in knowing what 3 non-english languages are the most popular in their city. 
+
+IMPLEMENTATION: There could be a drop down for sorting and a cap of the amount of languages. For example, the user could select a choice of “Sort by Size of Community” and input a cap of 3 languages. The cap would prevent the user from getting all 700 languages and being hard to read through. The user would then get an output of languages such as Indian English, German, and Haitian Creole. This method implementation may be a little messy and also limitive since we would be deciding on the possible sorting algorithms that the user can sort by.
