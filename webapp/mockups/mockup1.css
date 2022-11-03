@@ -3,3 +3,19 @@ Khizar Qureshi and Kendra Winhall
 mockup1.css
 For mockups assignment due 3 November 2022
 */
+
+h1 { 
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 32pt;
+}
+
+p { 
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14pt;
+    margin-top: 20px;
+}
+.input-group {
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+
