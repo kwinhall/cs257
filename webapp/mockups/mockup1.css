@@ -6,16 +6,16 @@ For mockups assignment due 3 November 2022
 
 h1 { 
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 32pt;
+    font-size: 30pt;
 }
 
 p { 
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 14pt;
-    margin-top: 20px;
+    font-size: 12pt;
+    margin-top: 16px;
 }
 .input-group {
-    margin-top: 10px;
-    margin-bottom: 30px;
+    margin-top: 6px;
+    margin-bottom: 24px;
 }
 
