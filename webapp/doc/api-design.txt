@@ -1,43 +1,365 @@
 Khizar Qureshi and Kendra Winhall
 
 REQUEST:
+/communities
+
+RESPONSE: a JSON list of dictionaries, each of which represents one language community sorted
+alphabetically by language. Each dictionary in this list will have the following fields.
+    language -- (TEXT) the language spoken
+    world_region -- (TEXT) the region where the language originates from
+    country -- (TEXT) the country where the language originates from
+    language_family -- (TEXT) the language family of the language
+    location -- (TEXT) the region in NYC where the language community is 
+    community_size -- (TEXT) the size of the community in the region in NYC
+
+EXAMPLE:
+    /communities
+        [{"language":"Abazza", "world_region":"Western Asia", "country":"Turkey,Russia", "language_family":"Abkhaz-Adyge", "location":"Wayne(NJ)", "community_size":"Smallest"},
+        {"language":"Abruzzese", "world_region":"Southern Europe", "country":"Italy", "language_family":"Indo-European", "location":"Astoria", "community_size":"Small"}
+        {"language":"Abruzzese", "world_region":"Southern Europe", "country":"Italy", "language_family":"Indo-European", "location":"Litle Italy", "community_size":"Small"}
+        ...]
+
+
+REQUEST:
 /communities?language_contains={search_text}
+
+GET parameters
+    search_text -- returns languages who contain search_text along with all the 
+    other corresponding data with the language community, case-insensitive
+
+RESPONSE: a JSON list of dictionaries, each of which represents one language community sorted
+alphabetically by language. Each dictionary in this list will have the following fields.
+    language -- (TEXT) the language spoken
+    world_region -- (TEXT) the region where the language originates from
+    country -- (TEXT) the country where the language originates from
+    language_family -- (TEXT) the language family of the language
+    location -- (TEXT) the region in NYC where the language community is 
+    community_size -- (TEXT) the size of the community in the region in NYC
+
+EXAMPLE:
+    /communities?language_contains=ab
+        [{"language":"Abazza", "world_region":"Western Asia", "country":"Turkey,Russia", "language_family":"Abkhaz-Adyge", "location":"Wayne(NJ)", "community_size":"Smallest"},
+        {"language":"Abruzzese", "world_region":"Southern Europe", "country":"Italy", "language_family":"Indo-European", "location":"Astoria", "community_size":"Small"}
+        {"language":"Abruzzese", "world_region":"Southern Europe", "country":"Italy", "language_family":"Indo-European", "location":"Litle Italy", "community_size":"Small"}
+        ...]
 
 REQUEST:
 /communities?world_region_contains={search_text}
 
+GET parameters
+    search_text -- returns world regions who contain search_text along with all the 
+    other corresponding data with the language community, case-insentive. 
+
+RESPONSE: a JSON list of dictionaries, each of which represents one language community sorted
+alphabetically by world regions. Each dictionary in this list will have the following fields.
+    language -- (TEXT) the language spoken
+    world_region -- (TEXT) the region where the language originates from
+    country -- (TEXT) the country where the language originates from
+    language_family -- (TEXT) the language family of the language
+    location -- (TEXT) the region in NYC where the language community is 
+    community_size -- (TEXT) the size of the community in the region in NYC
+
+EXAMPLE:
+    /communities?world_region_contains=south
+        [{"language":"Guyanese Creole", "world_region":"South America", "country":"Guyana", "language_family":"Indo-European", "location":"East Flatbush", "community_size":"Large"},
+        {"language":"Bolivian Spanish", "world_region":"South America", "country":"Bolivia", "language_family":"Indo-European", "location":"Jackson Heights", "community_size":"Medium"}
+        {"language":"Ecuadorian Spanish", "world_region":"South America", "country":"Ecuador", "language_family":"Indo-European", "location":"Bushwick", "community_size":"Large"}
+        ...]
+
+
 REQUEST:
 /communities?country_contains={search_text}
+
+GET parameters
+    search_text -- returns countries who contain search_text along with all the 
+    other corresponding data with the language community, case-insensitive
+
+RESPONSE: a JSON list of dictionaries, each of which represents one language community sorted
+alphabetically by countries. Each dictionary in this list will have the following fields.
+    language -- (TEXT) the language spoken
+    world_region -- (TEXT) the region where the language originates from
+    country -- (TEXT) the country where the language originates from
+    language_family -- (TEXT) the language family of the language
+    location -- (TEXT) the region in NYC where the language community is 
+    community_size -- (TEXT) the size of the community in the region in NYC
+
+EXAMPLE:
+    /communities?country_contains=armenia
+        [{"language":"Classical Armenian", "world_region":"Western Asia", "country":"Armenia", "language_family":"Indo-European", "location":"Murray Hill", "community_size":"Medium"},
+        {"language":"Classical Armenian", "world_region":"Western Asia", "country":"Armenia", "language_family":"Indo-European", "location":"Douglaston-Little Neck", "community_size":"Medium"}
+        {"language":"Eastern Armenian", "world_region":"Western Asia", "country":"Armenia,Russia", "language_family":"Indo-European", "location":"Sheepshead Bay", "community_size":"Medium"}
+        ...]
+
 
 REQUEST:
 /communities?language_family_contains={search_text}
 
+GET parameters
+    search_text -- returns language families who contain search_text along with all the 
+    other corresponding data with the language community, case-insensitive
+
+RESPONSE: a JSON list of dictionaries, each of which represents one language community sorted
+alphabetically by language families. Each dictionary in this list will have the following fields.
+    language -- (TEXT) the language spoken
+    world_region -- (TEXT) the region where the language originates from
+    country -- (TEXT) the country where the language originates from
+    language_family -- (TEXT) the language family of the language
+    location -- (TEXT) the region in NYC where the language community is 
+    community_size -- (TEXT) the size of the community in the region in NYC
+
+EXAMPLE:
+    /communities?language_family_contains=Yuman
+        [{"language":"Mojave", "world_region":"Northern America", "country":"United States", "language_family":"Cochimi-Yuman", "location":"Hamilton Heights", "community_size":"Smallest"},
+        {"language":"Kumeyaay", "world_region":"Northern America", "country":"Mexico,United States", "language_family":"Yuman", "location":"West Village", "community_size":"Smallest"}]
+
+
 REQUEST:
 /communities?location_contains={search_text}
+
+GET parameters
+    search_text -- returns locations who contain search_text along with all the 
+    other corresponding data with the language community, case-insensitive
+
+RESPONSE: a JSON list of dictionaries, each of which represents one language community sorted
+alphabetically by locations. Each dictionary in this list will have the following fields.
+    language -- (TEXT) the language spoken
+    world_region -- (TEXT) the region where the language originates from
+    country -- (TEXT) the country where the language originates from
+    language_family -- (TEXT) the language family of the language
+    location -- (TEXT) the region in NYC where the language community is 
+    community_size -- (TEXT) the size of the community in the region in NYC
+
+EXAMPLE:
+    /communities?location_contains=lau
+        [{"language":"Marathi", "world_region":"Southern Asia", "country":"India", "language_family":"Indo-European", "location":"Laurence Harbor(NJ)", "community_size":"Small"}]
+
 
 REQUEST:
 /communities?community_size_contains={search_text}
 
-REQUEST:
-/communities/previous
+GET parameters
+    search_text -- returns community sizes who contain search_text along with all the 
+    other corresponding data with the language community, case-insensitive
+
+RESPONSE: a JSON list of dictionaries, each of which represents one language community sorted
+by the size of each community alphabetically by each language. Each dictionary in this list will have the following fields.
+    language -- (TEXT) the language spoken
+    world_region -- (TEXT) the region where the language originates from
+    country -- (TEXT) the country where the language originates from
+    language_family -- (TEXT) the language family of the language
+    location -- (TEXT) the region in NYC where the language community is 
+    community_size -- (TEXT) the size of the community in the region in NYC
+
+EXAMPLE:
+    /communities?community_size_contains=large
+        [{"language":"African-American English", "world_region":"Northern America", "country":"United States", "language_family":"Indo-European", "location":"Hempstead(NY)", "community_size":"Large"},
+        {"language":"Akan", "world_region":"Western Africa", "country":"Ghana", "language_family":"Atlantic-Congo", "location":"University Heights", "community_size":"Large"}
+        {"language":"American Sign Language", "world_region":"Northern America", "country":"United States", "language_family":null, "location":"Jackson Heights", "community_size":"Large"}
+        ...]
+
 
 REQUEST:
-/communities/next
+/communities/next/next_page_number
+RESPONSE: returns the next 10 entries of the JSON list of dictionaries
+
+EXAMPLE:
+    /communities/next/2
+        [{"language":"African-American English", "world_region":"Northern America", "country":"United States", "language_family":"Indo-European", "location":"Clifton", "community_size":"Largest"},
+        {"language":"African-American English", "world_region":"Northern America", "country":"United States", "language_family":"Indo-European", "location":"Clifton", "community_size":"Largest"},
+        {"language":"African-American English", "world_region":"Northern America", "country":"United States", "language_family":"Indo-European", "location":"Clifton", "community_size":"Largest"}
+        ...]
+
 
 REQUEST:
-/communities/language/reverse
+/communities?category={search_text}/next/next_page_number
+
+GET parameters
+    search_text -- returns entries in the given category who contain search_text along with all the
+    other corresponding data with the language community, case-insentive. 
+
+RESPONSE: returns the next 10 entries of the JSON list of dictionaries
+
+EXAMPLE:
+    /communities?language_contains=a/next/2
+        [{"language":"African-American English", "world_region":"Northern America", "country":"United States", "language_family":"Indo-European", "location":"Clifton", "community_size":"Largest"},
+        {"language":"African-American English", "world_region":"Northern America", "country":"United States", "language_family":"Indo-European", "location":"Clifton", "community_size":"Largest"},
+        {"language":"African-American English", "world_region":"Northern America", "country":"United States", "language_family":"Indo-European", "location":"Clifton", "community_size":"Largest"}
+        ...]
+
 
 REQUEST:
-/communities/world_region/reverse
+/communities/reverse_category/next/next_page_number
+    
+RESPONSE: returns the next 10 entries of the JSON list of dictionaries
+
+EXAMPLE:
+    /communities?/reverse_language/next/2
+        [{"language":"Zapotec", "world_region":"Central America", "country":"Mexico", "language_family":"Otomanguean", "location":"Mott Haven", "community_size":"Smallest"},
+        {"language":"Zaghawa", "world_region":"Northern Africa", "country":"Sudan,Chad", "language_family":"Saharan", "location":"Flatbush", "community_size":"Smallest"},
+        {"language":"Zacaptec Mixtec", "world_region":"Central America", "country":"Mexico", "language_family":"Otomanguean", "location":"New Brunswick (NJ)", "community_size":"Small"}
+        ...]
+
 
 REQUEST:
-/communities/country/reverse
+/communities?category={search_text}/reverse_category/next/next_page_number
+
+GET parameters
+    search_text -- returns entries in the given category who contain search_text along with all the
+    other corresponding data with the language community, case-insentive. 
+    
+RESPONSE: returns the next 10 entries of the JSON list of dictionaries
+
+EXAMPLE:
+    /communities?language_contains=a/reverse_language/next/2
+        [{"language":"Zaghawa", "world_region":"Northern Africa", "country":"Sudan,Chad", "language_family":"Saharan", "location":"Flatbush", "community_size":"Smallest"},
+        {"language":"Zacaptec Mixtec", "world_region":"Central America", "country":"Mexico", "language_family":"Otomanguean", "location":"New Brunswick (NJ)", "community_size":"Small"},
+        {"language":"Yunnanese", "world_region":"Eastern Asia", "country":"China", "language_family":"Sino-Tibetan", "location":"Flushing", "community_size":"Small"}
+        ...]
+
 
 REQUEST:
-/communities/language_family/reverse
+/communities/previous/previous_page_number
+RESPONSE: returns the previous 10 entries of the JSON list of dictionaries
+
+EXAMPLE:
+    /communities/previous/2
+        [{"language":"African-American English", "world_region":"Northern America", "country":"United States", "language_family":"Indo-European", "location":"Clifton", "community_size":"Largest"},
+        {"language":"African-American English", "world_region":"Northern America", "country":"United States", "language_family":"Indo-European", "location":"Clifton", "community_size":"Largest"},
+        {"language":"African-American English", "world_region":"Northern America", "country":"United States", "language_family":"Indo-European", "location":"Clifton", "community_size":"Largest"}
+        ...]
+
 
 REQUEST:
-/communities/location/reverse
+/communities?category={search_text}/previous/previous_page_number
+
+GET parameters
+    search_text -- returns entries in the given category who contain search_text along with all the
+    other corresponding data with the language community, case-insentive. 
+
+RESPONSE: returns the previous 10 entries of the JSON list of dictionaries
+
+EXAMPLE:
+    /communities?language_contains=a/previous/2
+        [{"language":"African-American English", "world_region":"Northern America", "country":"United States", "language_family":"Indo-European", "location":"Clifton", "community_size":"Largest"},
+        {"language":"African-American English", "world_region":"Northern America", "country":"United States", "language_family":"Indo-European", "location":"Clifton", "community_size":"Largest"},
+        {"language":"African-American English", "world_region":"Northern America", "country":"United States", "language_family":"Indo-European", "location":"Clifton", "community_size":"Largest"}
+        ...]
+
 
 REQUEST:
-/communities/community_size/reverse
+/communities/reverse_category/previous/previous_page_number
+    
+RESPONSE: returns the previous 10 entries of the JSON list of dictionaries
+
+EXAMPLE:
+    /communities?/reverse_language/previous/2
+        [{"language":"Zapotec", "world_region":"Central America", "country":"Mexico", "language_family":"Otomanguean", "location":"Mott Haven", "community_size":"Smallest"},
+        {"language":"Zaghawa", "world_region":"Northern Africa", "country":"Sudan,Chad", "language_family":"Saharan", "location":"Flatbush", "community_size":"Smallest"},
+        {"language":"Zacaptec Mixtec", "world_region":"Central America", "country":"Mexico", "language_family":"Otomanguean", "location":"New Brunswick (NJ)", "community_size":"Small"}
+        ...]
+
+
+REQUEST:
+/communities?category={search_text}/reverse_category/previous/previous_page_number
+
+GET parameters
+    search_text -- returns entries in the given category who contain search_text along with all the
+    other corresponding data with the language community, case-insentive. 
+    
+RESPONSE: returns the previous 10 entries of the JSON list of dictionaries
+
+EXAMPLE:
+    /communities?language_contains=a/reverse_language/previous/2
+        [{"language":"Zaghawa", "world_region":"Northern Africa", "country":"Sudan,Chad", "language_family":"Saharan", "location":"Flatbush", "community_size":"Smallest"},
+        {"language":"Zacaptec Mixtec", "world_region":"Central America", "country":"Mexico", "language_family":"Otomanguean", "location":"New Brunswick (NJ)", "community_size":"Small"},
+        {"language":"Yunnanese", "world_region":"Eastern Asia", "country":"China", "language_family":"Sino-Tibetan", "location":"Flushing", "community_size":"Small"}
+        ...]
+
+
+REQUEST:
+communities/reverse_language
+
+RESPONSE: reverses JSON list of dictionaries by alphabetical order of languages
+
+EXAMPLE:
+    /communities/reverse_language
+        [{"language":"Ü-Tsang Tibetan", "world_region":"Eastern Asia", "country":"China,India", "language_family":"Sino-Tibetan", "location":"Jackson Heights", "community_size":"Medium"},
+        {"language":"Zuwara", "world_region":"Northern Africa", "country":"Libya", "language_family":"Afro-Asiatic", "location":"Hollis", "community_size":"Largest"}
+        {"language":"Zulu", "world_region":"Northen Africa", "country":"South Africa, Lesotho", "language_family":"Atlantic-Congo", "location":"Edenwald", "community_size":"Largest"}
+        ...]
+
+
+REQUEST:
+communities/reverse_world_region
+
+RESPONSE: reverses JSON list of dictionaries by alphabetical order of world regions
+
+EXAMPLE:
+    /communities/reverse_world_region
+        [{"language":"Romansh", "world_region":"Western Europe", "country":"Switzerland", "language_family":"Indo-European", "location":"Sheepshead Bay", "community_size":"Smallest"},
+        {"language":"Franconian", "world_region":"Western Europe", "country":"Germany", "language_family":"Indo-European", "location":"Washington Heights", "community_size":"Smallest"}
+        {"language":"German", "world_region":"Western Europe", "country":"Germany, Austria, Switzerland", "language_family":"Indo-European", "location":"East Village", "community_size":"Largest"}
+        ...]
+
+
+REQUEST:
+communities/reverse_country
+
+RESPONSE: reverses JSON list of dictionaries by alphabetical order of countries
+
+EXAMPLE:
+    /communities/reverse_country
+        [{"language":"Shona", "world_region":"Eastern Africa", "country":"Zimbabwe, Zambia", "language_family":"Atlantic-Congo", "location":"Roosevelt Island", "community_size":"Smallest"},
+        {"language":"Tonga", "world_region":"Eastern Africa", "country":"Zimbabwe, Zambia", "language_family":"Atlantic-Congo", "location":"Central Harlem", "community_size":"Smallest"}
+        {"language":"Ndebele", "world_region":"Southern Africa", "country":"Zimbabwe, Botswana", "language_family":"Atlantic-Congo", "location":"Midtown", "community_size":"Smallest"}
+        ...]
+
+REQUEST:
+communities/reverse_language_family
+
+RESPONSE: reverses JSON list of dictionaries by alphabetical order of language families
+
+EXAMPLE:
+    /communities/reverse_language_family
+        [{"language":"Kumeyaay", "world_region":"Northern America", "country":"Mexico,United States", "language_family":"Yuman", "location":"West Village", "community_size":"Smallest"},
+        {"language":"Nahuatl", "world_region":"Central America", "country":"Mexico", "language_family":"Uto-Aztecan", "location":"Sunset Park", "community_size":"Medium"}
+        {"language":"Nahuatl", "world_region":"Central America", "country":"Mexico", "language_family":"Uto-Aztecan", "location":"New Haven (CT)", "community_size":"Medium"}
+        ...]
+
+
+REQUEST:
+communities/reverse_location
+
+RESPONSE: reverses JSON list of dictionaries by alphabetical order of locations
+
+EXAMPLE:
+    /communities/reverse_location   
+        [{"language":"Bavarian", "world_region":"Western Europe", "country":"Austria, Germany", "language_family":"Indo-European", "location":"Yorkville", "community_size":"Large"},
+        {"language":"Balti", "world_region":"Southern Asia", "country":"Pakistan, India", "language_family":"Sino-Tibetan", "location":"Yorkville", "community_size":"Smallest"}
+        {"language":"Bartangi", "world_region":"Cental Asia", "country":"Tajikstan, Afghanistan", "language_family":"Indo-European", "location":"Yorkville", "community_size":"Smallest"}
+        ...]
+        
+
+REQUEST:
+communities/reverse_community_size
+
+RESPONSE: reverses JSON list of dictionaries by size of community. 
+Within each community size, each language is sorted by alphabetically
+
+EXAMPLE:
+    /communities/reverse_community_size
+        [{"language":"Indian English", "world_region":"Southern Asia", "country":"India", "language_family":"Indo-European", "location":"Bellerose", "community_size":"Largest"},
+        {"language":"German", "world_region":"Western Europe", "country":"Germany,Austria,Switzerland", "language_family":"Indo-European", "location":"East Village", "community_size":"Largest"}
+        {"language":"Haitian Creole", "world_region":"Caribbean", "country":"Haiti, Dominican Republic", "language_family":"Indo-European", "location":"Queens Village", "community_size":"Largest"}
+        ...]
+
+
+REQUEST:
+/communities?category={search_text}/reverse_category
+
+EXAMPLE:
+    /communities/world_region_contains=a/reverse_language
+        [{"language":"Ü-Tsang Tibetan", "world_region":"Eastern Asia", "country":"China,India", "language_family":"Sino-Tibetan", "location":"Jackson Heights", "community_size":"Medium"},
+        {"language":"Zuwara", "world_region":"Northern Africa", "country":"Libya", "language_family":"Afro-Asiatic", "location":"Hollis", "community_size":"Largest"}
+        {"language":"Zulu", "world_region":"Northen Africa", "country":"South Africa, Lesotho", "language_family":"Atlantic-Congo", "location":"Edenwald", "community_size":"Largest"}
+        ...]
