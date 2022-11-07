@@ -23,7 +23,7 @@ EXAMPLE:
 REQUEST:
 /communities?language_contains={search_text}
 
-GET parameters
+GET parameter:
     search_text -- returns languages who contain search_text along with all the 
     other corresponding data with the language community, case-insensitive
 
@@ -43,15 +43,16 @@ EXAMPLE:
         {"language":"Abruzzese", "world_region":"Southern Europe", "country":"Italy", "language_family":"Indo-European", "location":"Litle Italy", "community_size":"Small"}
         ...]
 
+
 REQUEST:
 /communities?world_region_contains={search_text}
 
-GET parameters
+GET parameter:
     search_text -- returns world regions who contain search_text along with all the 
     other corresponding data with the language community, case-insentive. 
 
 RESPONSE: a JSON list of dictionaries, each of which represents one language community sorted
-alphabetically by world regions. Each dictionary in this list will have the following fields.
+alphabetically by world region. Each dictionary in this list will have the following fields.
     language -- (TEXT) the language spoken
     world_region -- (TEXT) the region where the language originates from
     country -- (TEXT) the country where the language originates from
@@ -70,12 +71,12 @@ EXAMPLE:
 REQUEST:
 /communities?country_contains={search_text}
 
-GET parameters
+GET parameter:
     search_text -- returns countries who contain search_text along with all the 
     other corresponding data with the language community, case-insensitive
 
 RESPONSE: a JSON list of dictionaries, each of which represents one language community sorted
-alphabetically by countries. Each dictionary in this list will have the following fields.
+alphabetically by country. Each dictionary in this list will have the following fields.
     language -- (TEXT) the language spoken
     world_region -- (TEXT) the region where the language originates from
     country -- (TEXT) the country where the language originates from
@@ -94,7 +95,7 @@ EXAMPLE:
 REQUEST:
 /communities?language_family_contains={search_text}
 
-GET parameters
+GET parameter:
     search_text -- returns language families who contain search_text along with all the 
     other corresponding data with the language community, case-insensitive
 
@@ -116,7 +117,7 @@ EXAMPLE:
 REQUEST:
 /communities?location_contains={search_text}
 
-GET parameters
+GET parameter:
     search_text -- returns locations who contain search_text along with all the 
     other corresponding data with the language community, case-insensitive
 
@@ -137,7 +138,7 @@ EXAMPLE:
 REQUEST:
 /communities?community_size_contains={search_text}
 
-GET parameters
+GET parameter:
     search_text -- returns community sizes who contain search_text along with all the 
     other corresponding data with the language community, case-insensitive
 
@@ -173,7 +174,7 @@ EXAMPLE:
 REQUEST:
 /communities?category={search_text}/next/next_page_number
 
-GET parameters
+GET parameter:
     search_text -- returns entries in the given category who contain search_text along with all the
     other corresponding data with the language community, case-insentive. 
 
@@ -203,7 +204,7 @@ EXAMPLE:
 REQUEST:
 /communities?category={search_text}/reverse_category/next/next_page_number
 
-GET parameters
+GET parameter:
     search_text -- returns entries in the given category who contain search_text along with all the
     other corresponding data with the language community, case-insentive. 
     
@@ -232,7 +233,7 @@ EXAMPLE:
 REQUEST:
 /communities?category={search_text}/previous/previous_page_number
 
-GET parameters
+GET parameter:
     search_text -- returns entries in the given category who contain search_text along with all the
     other corresponding data with the language community, case-insentive. 
 
@@ -262,7 +263,7 @@ EXAMPLE:
 REQUEST:
 /communities?category={search_text}/reverse_category/previous/previous_page_number
 
-GET parameters
+GET parameter:
     search_text -- returns entries in the given category who contain search_text along with all the
     other corresponding data with the language community, case-insentive. 
     
@@ -285,7 +286,7 @@ EXAMPLE:
     /communities/reverse_language
         [{"language":"Ü-Tsang Tibetan", "world_region":"Eastern Asia", "country":"China,India", "language_family":"Sino-Tibetan", "location":"Jackson Heights", "community_size":"Medium"},
         {"language":"Zuwara", "world_region":"Northern Africa", "country":"Libya", "language_family":"Afro-Asiatic", "location":"Hollis", "community_size":"Largest"}
-        {"language":"Zulu", "world_region":"Northen Africa", "country":"South Africa, Lesotho", "language_family":"Atlantic-Congo", "location":"Edenwald", "community_size":"Largest"}
+        {"language":"Zulu", "world_region":"Northern Africa", "country":"South Africa, Lesotho", "language_family":"Atlantic-Congo", "location":"Edenwald", "community_size":"Largest"}
         ...]
 
 
@@ -357,9 +358,13 @@ EXAMPLE:
 REQUEST:
 /communities?category={search_text}/reverse_category
 
+GET parameter:
+    search_text -- returns entries in the given category who contain search_text along with all the
+    other corresponding data with the language community, case-insentive. 
+
 EXAMPLE:
     /communities/world_region_contains=a/reverse_language
         [{"language":"Ü-Tsang Tibetan", "world_region":"Eastern Asia", "country":"China,India", "language_family":"Sino-Tibetan", "location":"Jackson Heights", "community_size":"Medium"},
         {"language":"Zuwara", "world_region":"Northern Africa", "country":"Libya", "language_family":"Afro-Asiatic", "location":"Hollis", "community_size":"Largest"}
-        {"language":"Zulu", "world_region":"Northen Africa", "country":"South Africa, Lesotho", "language_family":"Atlantic-Congo", "location":"Edenwald", "community_size":"Largest"}
+        {"language":"Zulu", "world_region":"Northern Africa", "country":"South Africa, Lesotho", "language_family":"Atlantic-Congo", "location":"Edenwald", "community_size":"Largest"}
         ...]
