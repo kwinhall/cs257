@@ -1,9 +1,8 @@
 '''
-    api.py
-    Jeff Ondich, 25 April 2016
-    Updated 8 November 2021
-
-    Tiny Flask API to support the tiny books web application.
+api.py
+Khizar Qureshi and Kendra Winhall
+For end-to-end assignment due 9 November 2022
+Flask API to support NYC language community web application.
 '''
 import sys
 import flask

@@ -1,8 +1,8 @@
 /*
- * books.js
- * Jeff Ondich, 27 April 2016
- * Updated, 5 November 2020
- */
+Khizar Qureshi and Kendra Winhall
+mockup1.css
+For end-to-end assignment due 9 November 2022
+*/
 
 window.onload = initialize;
 
@@ -43,7 +43,7 @@ function onButtonPress() {
 
         
 
-        let selector = document.getElementById('data_button');
+        let selector = document.getElementById('table');
         if (selector) {
             selector.innerHTML = selectorBody;
         }
