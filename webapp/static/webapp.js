@@ -43,7 +43,7 @@ function onButtonPress() {
 
         
 
-        let selector = document.getElementById('table');
+        let selector = document.getElementById('paragraph');
         if (selector) {
             selector.innerHTML = selectorBody;
         }
