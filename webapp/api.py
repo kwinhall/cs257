@@ -36,8 +36,9 @@ def get_communities():
         Returns an empty list if there's any database failure.
     '''
     query = '''SELECT language, world_region, country, language_family, location, community_size
-               FROM communities'''
-
+               FROM community_test'''
+    
+               
     community_list = []
     try:
         connection = get_connection()
