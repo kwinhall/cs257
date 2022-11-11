@@ -35,41 +35,6 @@ CREATE TABLE public.communities (
 
 
 --
--- Name: community_test; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.community_test (
-    id integer NOT NULL,
-    language text,
-    world_region text,
-    country text,
-    language_family text,
-    location text,
-    community_size text
-);
-
-
---
--- Name: community_test_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE public.community_test_id_seq
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: community_test_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE public.community_test_id_seq OWNED BY public.community_test.id;
-
-
---
 -- Name: countries; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -117,13 +82,6 @@ CREATE TABLE public.world_regions (
     id integer,
     world_region text
 );
-
-
---
--- Name: community_test id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.community_test ALTER COLUMN id SET DEFAULT nextval('public.community_test_id_seq'::regclass);
 
 
 --
@@ -1397,18 +1355,6 @@ COPY public.communities (language_id, world_region_id, country_id, language_fami
 725	22	342	48	260	Smallest
 726	22	343	48	260	Smallest
 727	22	343	48	260	Medium
-\.
-
-
---
--- Data for Name: community_test; Type: TABLE DATA; Schema: public; Owner: -
---
-
-COPY public.community_test (id, language, world_region, country, language_family, location, community_size) FROM stdin;
-1	Abazza	Western Asia	Turkey,Russia	Abkhaz-Adyge	Wayne(NJ)	Smallest
-2	Abruzzese	Southern Europe	Italy	Indo-European	Astoria	Small
-3	Abruzzese	Southern Europe	Italy	Indo-European	Littly Italy	Small
-4	Acehnese	Southeastern Asia	Indonesia	Austronesian	Astoria	Smallest
 \.
 
 
@@ -2850,13 +2796,6 @@ COPY public.world_regions (id, world_region) FROM stdin;
 21	Micronesia
 22	Polynesia
 \.
-
-
---
--- Name: community_test_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
---
-
-SELECT pg_catalog.setval('public.community_test_id_seq', 4, true);
 
 
 --
