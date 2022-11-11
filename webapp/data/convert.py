@@ -59,7 +59,7 @@ with open('nyc-language-data.csv') as original_data_file,\
             language_families_writer.writerow([language_family_id, language_family])
 
         if location not in locations:
-            location_id = len(location) +1
+            location_id = len(locations) +1
             locations[location] = location_id
             locations_writer.writerow([location_id, location])
         
