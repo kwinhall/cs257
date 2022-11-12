@@ -15,7 +15,6 @@
     <p> This website allows users to search through a dataset that contains over 700 languages spoken in New York City. Data is licensed
         under the ODbL license. Created by Kendra Winhall & Khizar Qureshi.
     </p>
-    <p><button id = "data_button">Click me to get the data!</button></p>
     <div class="container text-center">
         <div class="row">
             <div class="col-3">
@@ -23,19 +22,19 @@
             <div class="col-6">
                 <div class="input-group">
                     <div class="dropdown">
-                        <button class="btn btn-dark dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Category
+                        <button class="btn btn-dark dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Search All Categories
                         </button>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Language</a></li>
-                            <li><a class="dropdown-item" href="#">World Region</a></li>
-                            <li><a class="dropdown-item" href="#">Country</a></li>
-                            <li><a class="dropdown-item" href="#">Language Family</a></li>
-                            <li><a class="dropdown-item" href="#">Location</a></li>
-                            <li><a class="dropdown-item" href="#">Community Size</a></li>
+                            <li><a class="dropdown-item" href="#">Search Languages</a></li>
+                            <li><a class="dropdown-item" href="#">Search World Regions</a></li>
+                            <li><a class="dropdown-item" href="#">Search Countries</a></li>
+                            <li><a class="dropdown-item" href="#">Search Language Families</a></li>
+                            <li><a class="dropdown-item" href="#">Search Locations</a></li>
+                            <li><a class="dropdown-item" href="#">Search Community Sizes</a></li>
                         </ul>
                     </div>
-                    <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
-                    <button type="button" class="btn btn-dark">&#8981;
+                    <input id = "search_bar" type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+                    <button id = "search_button" type="button" class="btn btn-dark">&#8981;
                     </button>
                 </div>
             </div>

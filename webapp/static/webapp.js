@@ -6,25 +6,11 @@ For end-to-end assignment due 9 November 2022
 
 window.onload = initialize;
 
+
 function initialize() {
-    var button = document.getElementById('data_button');
-    button.onclick = onButtonPress;
-}
-
-
-// Returns the base URL of the API, onto which endpoint
-// components can be appended.
-function getAPIBaseURL() {
-    let baseURL = window.location.protocol
-                    + '//' + window.location.hostname
-                    + ':' + window.location.port
-                    + '/api';
-    return baseURL;
-}
-
-
-function onButtonPress() {
     let url = getAPIBaseURL() + '/communities/';
+    var search_button = document.getElementById('search_button');
+    search_button.onclick=onSearchButton;
 
 
     // Send the request to the books API /authors/ endpoint
@@ -36,20 +22,24 @@ function onButtonPress() {
 
     .then(function(communities) {
         let tableBody = ''
-        for (let k = 0; k < communities.length; k++) {
-            let community = communities[k];
-            tableBody += '<tr><td>' + community['language'] + '</td>'
-                         '<td>' + community['world_region'] + '</td>'; //+ community['country'] + community['language_family'] + community['location'] + community['community_size'];
-
+        for (let k = 1; k <= communities.length; k++) {
+            let community = communities[k-1];
+            tableBody += '<tr><th scope="row">' + k + '</th>' + 
+                        '<td>' + community['language'] + '</td>' + 
+                         '<td>' + community['world_region'] + '</td>' + 
+                         '<td>' + community['country'] + '</td>' + 
+                         '<td>' + community['language_family'] + '</td>' + 
+                         '<td>' + community['location'] + '</td>' +
+                         '<td>' + community['community_size'] + '</td>' +
                          '</tr>\n';
         }
-
-        
-
+       
         let table = document.getElementById('results_table');
         if (table) {
             table.innerHTML = tableBody;
         }
+    
+
     })
 
 
@@ -62,4 +52,17 @@ function onButtonPress() {
     });
 }
 
+function onSearchButton() { 
+    var search_text = document.getElementById('search_text');
+    let url = getAPIBaseURL() + '/communities?language_contains=' + search_text;
+}
 
+// Returns the base URL of the API, onto which endpoint
+// components can be appended.
+function getAPIBaseURL() {
+    let baseURL = window.location.protocol
+                    + '//' + window.location.hostname
+                    + ':' + window.location.port
+                    + '/api';
+    return baseURL;
+}

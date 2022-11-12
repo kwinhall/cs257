@@ -35,14 +35,54 @@ def get_communities():
         Returns an empty list if there's any database failure.
     '''
     query = '''SELECT language, world_region, country, language_family, location, community_size
-               FROM community_test'''
+               FROM languages, world_regions, countries, language_families, locations, communities
+               WHERE languages.id = communities.language_id
+               AND world_regions.id = communities.world_region_id
+               AND countries.id = communities.country_id
+               AND language_families.id = communities.language_family_id
+               AND locations.id = communities.location_id
+               '''  
+    like_argument = ''         
     
-               
+    language_contains = flask.request.args.get('language_contains')
+    if language_contains:
+        like_argument = '%' + language_contains + '%'
+        query += 'AND languages.language LIKE %s' 
+        
+    world_region_contains = flask.request.args.get('world_region_contains')
+    if world_region_contains:
+        like_argument = '%' + world_region_contains + '%'
+        query += 'AND world_regions.world_region ILIKE %s' 
+    
+    country_contains = flask.request.args.get('country_contains')
+    if country_contains:
+        like_argument = '%' + country_contains + '%'
+        query += 'AND countries.country ILIKE %s' 
+        
+    language_family_contains = flask.request.args.get('language_family_contains')
+    if language_family_contains:
+        like_argument = '%' + language_family_contains + '%'
+        query += 'AND language_families.language_family ILIKE %s' 
+    
+    location_contains = flask.request.args.get('location_contains')
+    if location_contains:
+        like_argument = '%' + location_contains + '%'
+        query += 'AND locations.location ILIKE %s' 
+        
+    community_size_contains = flask.request.args.get('community_size_contains')
+    if community_size_contains:
+        like_argument = '%' + community_size_contains + '%'
+        query += 'AND communities.community_size ILIKE %s' 
+    
+    
+    
+    
     community_list = []
     try:
         connection = get_connection()
         cursor = connection.cursor()
-        cursor.execute(query, tuple())
+        cursor.execute(query, (like_argument,))
+        print(query + like_argument)
         for row in cursor:
             community = {'language':row[0],
                       'world_region':row[1],
@@ -57,4 +97,5 @@ def get_communities():
         print(e, file=sys.stderr)
 
     return json.dumps(community_list)
+
 
