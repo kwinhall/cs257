@@ -35,17 +35,20 @@ function onButtonPress() {
     .then((response) => response.json())
 
     .then(function(communities) {
-        let selectorBody = ''
+        let tableBody = ''
         for (let k = 0; k < communities.length; k++) {
             let community = communities[k];
-            selectorBody += community['language'] + community['world_region'] + community['country'] + community['language_family'] + community['location'] + community['community_size'];
+            tableBody += '<tr><td>' + community['language'] + '</td>'
+                         '<td>' + community['world_region'] + '</td>'; //+ community['country'] + community['language_family'] + community['location'] + community['community_size'];
+
+                         '</tr>\n';
         }
 
         
 
-        let selector = document.getElementById('paragraph');
-        if (selector) {
-            selector.innerHTML = selectorBody;
+        let table = document.getElementById('results_table');
+        if (table) {
+            table.innerHTML = tableBody;
         }
     })
 
