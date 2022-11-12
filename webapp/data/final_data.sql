@@ -70,7 +70,7 @@ CREATE TABLE public.languages (
 
 CREATE TABLE public.locations (
     id integer,
-    country text
+    location text
 );
 
 
@@ -2504,7 +2504,7 @@ COPY public.languages (id, language) FROM stdin;
 -- Data for Name: locations; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY public.locations (id, country) FROM stdin;
+COPY public.locations (id, location) FROM stdin;
 1	Wayne (NJ)
 2	Astoria
 3	Little Italy
