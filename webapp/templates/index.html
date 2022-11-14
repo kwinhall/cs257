@@ -22,15 +22,17 @@
             <div class="col-6">
                 <div class="input-group">
                     <div class="dropdown">
-                        <button class="btn btn-dark dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Search All Categories
+                        <button class="btn btn-dark dropdown-toggle" type="button" id="dropdown" data-bs-toggle="dropdown" aria-expanded="false">Search All Categories
                         </button>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Search Languages</a></li>
-                            <li><a class="dropdown-item" href="#">Search World Regions</a></li>
-                            <li><a class="dropdown-item" href="#">Search Countries</a></li>
-                            <li><a class="dropdown-item" href="#">Search Language Families</a></li>
-                            <li><a class="dropdown-item" href="#">Search Locations</a></li>
-                            <li><a class="dropdown-item" href="#">Search Community Sizes</a></li>
+                            <li><value="1" id="language_search" a class="dropdown-item" href="#">Search Languages</a></li>
+                            <li><value="2" id="world_region_search" a class="dropdown-item" href="#">Search World Regions</a></li>
+                            <li><value="3" id="country_search" a class="dropdown-item" href="#">Search Countries</a></li>
+                            <li><value="4" id="language_family_search" a class="dropdown-item" href="#">Search Language Families</a></li>
+                            <li><value="5" id="location_search" a class="dropdown-item" href="#">Search Locations</a></li>
+                            <li><value="6" id="community_size_search" a class="dropdown-item" href="#">Search Community Sizes</a></li>
+                            <li><value="7" id="all_search" a class="dropdown-item" href="#">Search All Categories</a></li>
+                            
                         </ul>
                     </div>
                     <input id = "search_bar" type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />

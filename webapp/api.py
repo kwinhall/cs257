@@ -47,7 +47,7 @@ def get_communities():
     language_contains = flask.request.args.get('language_contains')
     if language_contains:
         like_argument = '%' + language_contains + '%'
-        query += 'AND languages.language LIKE %s' 
+        query += 'AND languages.language ILIKE %s' 
         
     world_region_contains = flask.request.args.get('world_region_contains')
     if world_region_contains:
@@ -73,10 +73,22 @@ def get_communities():
     if community_size_contains:
         like_argument = '%' + community_size_contains + '%'
         query += 'AND communities.community_size ILIKE %s' 
+        
+    all_contains = flask.request.args.get('all_contains')
+    if all_contains:
+        like_argument = '%' + all_contains + '%'
+        query += 'AND languages.language ILIKE %s'
+        query += 'OR world_regions.world_region ILIKE %s' 
+        query += 'OR countries.country ILIKE %s' 
+        query += 'OR language_families.language_family ILIKE %s' 
+        query += 'OR locations.location ILIKE %s' 
+        query += 'OR communities.community_size ILIKE %s' 
+        
+         
+        
     
     
-    
-    
+    print(query + like_argument)
     community_list = []
     try:
         connection = get_connection()
