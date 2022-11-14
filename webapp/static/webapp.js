@@ -20,7 +20,8 @@ function initialize() {
 
 function onSearchButton() { 
     var dropdown = document.getElementById('dropdown');
-    var search_text = document.getElementById('search_bar');
+    search_text = document.getElementById('search_bar');
+    var url = getAPIBaseURL() + '/communities?all_contains=' + search_text.value;
 
 
     switch(dropdown.innerHTML) {
