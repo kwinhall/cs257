@@ -15,6 +15,13 @@ app.register_blueprint(api.api, url_prefix='/api')
 def home():
     return flask.render_template('index.html')
 
+@app.route('/api/help')
+def help():
+    with open('api_help.txt', 'r') as file:
+        content = file.read()
+        
+    return flask.Response(content, mimetype='text/plain')
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser('A NYC languages application, including API & DB')
     parser.add_argument('host', help='the host to run on')
