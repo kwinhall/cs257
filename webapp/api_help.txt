@@ -19,6 +19,34 @@ EXAMPLE:
         {"language":"Abruzzese", "world_region":"Southern Europe", "country":"Italy", "language_family":"Indo-European", "location":"Litle Italy", "community_size":"Small"}
         ...]
 
+REQUEST:
+/help
+Response: shows the api design text file. 
+
+REQUEST:
+/communities/?all_contains={search_text}
+
+GET parameter:
+    search_text -- returns community sizes who contain search_text along with all the 
+    other corresponding data with the language community, case-insensitive
+
+RESPONSE: a JSON list of dictionaries, each of which represents one language community sorted
+by the size of each community alphabetically by each language. Each dictionary in this list will have the following fields.
+    language -- (TEXT) the language spoken
+    world_region -- (TEXT) the region where the language originates from
+    country -- (TEXT) the country where the language originates from
+    language_family -- (TEXT) the language family of the language
+    location -- (TEXT) the region in NYC where the language community is 
+    community_size -- (TEXT) the size of the community in the region in NYC
+
+
+EXAMPLE:
+    /communities/?all_contains=ab
+        [{"language":"Abazza", "world_region":"Western Asia", "country":"Turkey,Russia", "language_family":"Abkhaz-Adyge", "location":"Wayne(NJ)", "community_size":"Smallest"},
+        {"language":"Abruzzese", "world_region":"Southern Europe", "country":"Italy", "language_family":"Indo-European", "location":"Astoria", "community_size":"Small"}
+        {"language":"Abruzzese", "world_region":"Southern Europe", "country":"Italy", "language_family":"Indo-European", "location":"Litle Italy", "community_size":"Small"}
+        ...]
+
 
 REQUEST:
 /communities/?language_contains={search_text}

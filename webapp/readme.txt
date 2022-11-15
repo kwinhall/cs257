@@ -1,7 +1,7 @@
 AUTHORS: Kendra Winhall & Khizar Qureshi
 DATA: This dataset contains over 1200 langauge communities in NYC 
 
-FEATURES CURRENTLY WORKING;
+FEATURES CURRENTLY WORKING:
 -Drop down
 -Search bar
 -Search button
