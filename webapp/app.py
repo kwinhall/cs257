@@ -1,7 +1,7 @@
 '''
 app.py
 Khizar Qureshi and Kendra Winhall
-For end-to-end assignment due 9 November 2022
+For Web application:first draft due 14th November 2022
 Flask application to support NYC language community web application.
 '''
 import flask
@@ -16,7 +16,7 @@ def home():
     return flask.render_template('index.html')
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser('A books-and-authors application, including API & DB')
+    parser = argparse.ArgumentParser('A NYC languages application, including API & DB')
     parser.add_argument('host', help='the host to run on')
     parser.add_argument('port', type=int, help='the port to listen on')
     arguments = parser.parse_args()

@@ -1,7 +1,7 @@
 '''
 api.py
 Khizar Qureshi and Kendra Winhall
-For end-to-end assignment due 9 November 2022
+For Web application:first draft due 14th November 2022
 Flask API to support NYC language community web application.
 '''
 import sys
@@ -22,16 +22,7 @@ def get_connection():
 
 @api.route('/communities/') 
 def get_communities():
-    ''' Returns a list of all the authors in our database. See
-        get_author_by_id below for description of the author
-        resource representation.
-
-        By default, the list is presented in alphabetical order
-        by surname, then given_name. You may, however, use
-        the GET parameter sort to request sorting by birth year.
-
-            http://.../authors/?sort=birth_year
-
+    ''' Returns a table of all the communities in our database. 
         Returns an empty list if there's any database failure.
     '''
     query = '''SELECT language, world_region, country, language_family, location, community_size
@@ -83,36 +74,53 @@ def get_communities():
     all_contains = flask.request.args.get('all_contains')
     if all_contains:
         like_argument = '%' + all_contains + '%'
-        query += ' AND languages.language ILIKE %s'
-        query += ' OR world_regions.world_region ILIKE %s' 
-        query += ' OR countries.country ILIKE %s' 
-        query += ' OR language_families.language_family ILIKE %s' 
-        query += ' OR locations.location ILIKE %s' 
-        query += ' OR communities.community_size ILIKE %s'
-      
+        query += 'AND (languages.language ILIKE %s'
+        query += 'OR world_regions.world_region ILIKE %s' 
+        query += 'OR countries.country ILIKE %s' 
+        query += 'OR language_families.language_family ILIKE %s' 
+        query += 'OR locations.location ILIKE %s' 
+        query += 'OR communities.community_size ILIKE %s)'
         
-    print(query + like_argument)
+
+      
     community_list = []
-    try:
-        connection = get_connection()
-        cursor = connection.cursor()
-        cursor.execute(query, (like_argument,))
-        print(query + like_argument)
-        print('HEY')
-        print(cursor.query)
-        for row in cursor:
-            community = {'language':row[0],
-                      'world_region':row[1],
-                      'country':row[2],
-                      'language_family':row[3],
-                      'location':row[4],
-                      'community_size':row[5]}
-            community_list.append(community)
-        cursor.close()
-        connection.close()
-    except Exception as e:
-        print(e, file=sys.stderr)
-
-    return json.dumps(community_list)
-
-
+    
+    if all_contains:
+        try:
+            community_list = []
+            connection = get_connection()
+            cursor = connection.cursor()
+            cursor.execute(query, (like_argument, like_argument, like_argument, like_argument, like_argument, like_argument,))
+            for row in cursor:
+                community = {'language':row[0],
+                        'world_region':row[1],
+                        'country':row[2],
+                        'language_family':row[3],
+                        'location':row[4],
+                        'community_size':row[5]}
+                community_list.append(community)
+            cursor.close()
+            connection.close()
+        except Exception as e:
+            print(e, file=sys.stderr)
+        return json.dumps(community_list)  
+        
+    else:
+        
+        try:
+            connection = get_connection()
+            cursor = connection.cursor()
+            cursor.execute(query, (like_argument,))
+            for row in cursor:
+                community = {'language':row[0],
+                        'world_region':row[1],
+                        'country':row[2],
+                        'language_family':row[3],
+                        'location':row[4],
+                        'community_size':row[5]}
+                community_list.append(community)
+            cursor.close()
+            connection.close()
+        except Exception as e:
+            print(e, file=sys.stderr)
+        return json.dumps(community_list)

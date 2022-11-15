@@ -1,7 +1,7 @@
 /*
 Khizar Qureshi and Kendra Winhall
-mockup1.css
-For end-to-end assignment due 9 November 2022
+webapp.js
+For Web application:first draft due 14th November 2022
 */
 
 window.onload = initialize;
@@ -13,16 +13,12 @@ function initialize() {
     search_button.onclick = onSearchButton;
     dropDown();
     makeTable(url);
-
-   
 }
-
 
 function onSearchButton() { 
     var dropdown = document.getElementById('dropdown');
     search_text = document.getElementById('search_bar');
     var url = getAPIBaseURL() + '/communities?all_contains=' + search_text.value;
-
 
     switch(dropdown.innerHTML) {
         case "Search All Categories":
@@ -46,14 +42,11 @@ function onSearchButton() {
         case "Search Community Sizes":
             var url = getAPIBaseURL() + '/communities?community_size_contains=' + search_text.value;
             break;
-
-            
     }
     makeTable(url);
 }
 
 function dropDown() {
-    
     var language_search = document.getElementById('language_search');
     var world_region_search = document.getElementById('world_region_search');
     var country_search = document.getElementById('country_search');
@@ -61,7 +54,6 @@ function dropDown() {
     var location_search = document.getElementById('location_search');
     var community_size_search = document.getElementById('community_size_search');
     var all_search = document.getElementById('all_search');
-
 
     language_search.onclick = languageSearch;
     world_region_search.onclick = worldRegionSearch;
@@ -113,10 +105,7 @@ function allSearch(){
     var dropdown = document.getElementById('dropdown');
     dropdown.innerHTML = "Search All Categories"; 
 
-
 }
-
-
 
 // Returns the base URL of the API, onto which endpoint
 // components can be appended.
@@ -155,14 +144,11 @@ function makeTable(url) {
         if (table) {
             table.innerHTML = tableBody;
         }
-    
-
     })
 
 
-    // Once you have your list of author dictionaries, use it to build
-    // an HTML table displaying the author names and lifespan.
-
+    // Once you have your list of communities dictionaries, use it to build
+    // an HTML table displaying the communities .
     // Log the error if anything went wrong during the fetch.
     .catch(function(error) {
         console.log(error);
