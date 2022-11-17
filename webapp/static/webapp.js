@@ -11,6 +11,12 @@ function initialize() {
     let url = getAPIBaseURL() + '/communities/';
     var search_button = document.getElementById('search_button');
     search_button.onclick = onSearchButton;
+    var search_bar = document.getElementById('search_bar');
+    search_bar.addEventListener('keypress', function(event) {
+        if (event.key === 'Enter') {
+            onSearchButton();
+        }
+    });
     dropDown();
     makeTable(url);
 }
