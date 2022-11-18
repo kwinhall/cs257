@@ -5,10 +5,18 @@ For Web application:first draft due 14th November 2022
 */
 
 window.onload = initialize;
+url = null;
+language_counter = 0;
+world_region_counter = 0;
+country_counter = 0;
+language_family_counter = 0;
+location_counter = 0;
+community_size_counter = 0;
+
 
 
 function initialize() {
-    let url = getAPIBaseURL() + '/communities/';
+    url = getAPIBaseURL() + '/communities/';
     var search_button = document.getElementById('search_button');
     search_button.onclick = onSearchButton;
     var search_bar = document.getElementById('search_bar');
@@ -19,44 +27,51 @@ function initialize() {
     });
     dropDown();
     makeTable(url);
-    var new_url = getAPIBaseURL() + '/communities/?all_contains=ital';
-    var button = document.getElementById('world_region_sort');
-    var counter = 0;
-    test_url = realInOrder(new_url, button, counter);
-    makeTable(test_url);
+    var language_sort_button = document.getElementById('language_sort');
+    var world_region_sort_button = document.getElementById("world_region_sort");
+    var country_sort_button = document.getElementById('country_sort');
+    var language_family_sort_button = document.getElementById('language_family_sort');
+    var location_sort_button = document.getElementById('location_sort');
+    var community_size_sort_button = document.getElementById('community_size_sort'); 
+    language_sort_button.onclick = onLanguageButtonClick;
+    world_region_sort_button.onclick = onWorldRegionButtonClick;
+    country_sort_button.onclick = onCountryButtonClick;
+    language_family_sort_button.onclick = onLanguageFamilyButtonClick;
+    location_sort_button.onclick = onLocationButtonClick;
+    community_size_sort_button.onclick = onCommunitySizeButtonClick;
+
 }
 
 function onSearchButton() { 
     var dropdown = document.getElementById('dropdown');
     search_text = document.getElementById('search_bar');
-    var url = getAPIBaseURL() + '/communities?all_contains=' + search_text.value;
+    url = getAPIBaseURL() + '/communities?all_contains=' + search_text.value;
 
     switch(dropdown.innerHTML) {
         case "Search All Categories":
-            var url = getAPIBaseURL() + '/communities?all_contains=' + search_text.value;
+            url = getAPIBaseURL() + '/communities?all_contains=' + search_text.value;
             break;
         case "Search Languages":
-            var url = getAPIBaseURL() + '/communities?language_contains=' + search_text.value;
+            url = getAPIBaseURL() + '/communities?language_contains=' + search_text.value;
             break;
         case "Search World Regions":
-            var url = getAPIBaseURL() + '/communities?world_region_contains=' + search_text.value;
+            url = getAPIBaseURL() + '/communities?world_region_contains=' + search_text.value;
             break;
         case "Search Countries":
-            var url = getAPIBaseURL() + '/communities?country_contains=' + search_text.value;
+            url = getAPIBaseURL() + '/communities?country_contains=' + search_text.value;
             break;
         case "Search Language Families":
-            var url = getAPIBaseURL() + '/communities?language_family_contains=' + search_text.value;
+            url = getAPIBaseURL() + '/communities?language_family_contains=' + search_text.value;
             break;
         case "Search Locations":
-            var url = getAPIBaseURL() + '/communities?location_contains=' + search_text.value;
+            url = getAPIBaseURL() + '/communities?location_contains=' + search_text.value;
             break;
         case "Search Community Sizes":
-            var url = getAPIBaseURL() + '/communities?community_size_contains=' + search_text.value;
+            url = getAPIBaseURL() + '/communities?community_size_contains=' + search_text.value;
             break;
     }
 
     makeTable(url);
-    return url;
 }
 
 function dropDown() {
@@ -77,124 +92,6 @@ function dropDown() {
     all_search.onclick = allSearch;  
     
 }
-function sortFunction(url) {
-    var language_counter = 0;
-    var world_region_counter = 0;
-    var country_counter = 0;
-    var language_family_counter = 0;
-    var location_counter = 0;
-    var community_size_counter = 0;
-    var language_sort_button = document.getElementById('language_sort');
-    let world_region_sort_button = document.getElementById("world_region_sort");
-    var country_sort_button = document.getElementById('country_sort');
-    var language_family_sort_button = document.getElementById('language_family_sort');
-    var location_sort_button = document.getElementById('location_sort');
-    var community_size_sort_button = document.getElementById('community_size_sort'); 
-    language_sort_button.onclick = inOrder(url,language_sort_button, language_counter);
-    language_sort_button.onclick = language_counter++;
-    world_region_sort_button.onclick = inOrder(url,world_region_sort_button, world_region_counter);
-    world_region_sort_button.onclick = world_region_counter++;
-    country_sort_button.onclick = inOrder(url,country_sort_button, country_counter);
-    country_sort_button.onclick = country_counter++;
-    language_family_sort_button.onclick = inOrder(url,language_family_sort_button,language_family_counter);
-    language_family_sort_button.onclick = language_family_counter++;
-    location_sort_button.onclick = inOrder(url,location_sort_button,location_counter);
-    location_sort_button.onclick = location_counter++;
-    community_size_sort_button.onclick = inOrder(url,community_size_sort_button,community_size_counter);
-    community_size_sort_button.onclick = community_size_counter++;
-}
-
-function realInOrder(url, button, counter) {
-    alert(button.id);
-    if (button.id == "language_sort") {
-        if (counter % 2 == 0) {
-            return url + '&sort_by=language&reverse=false';
-        } else {
-            return url + '&sort_by=language&reverse=true';
-        }
-    }
-    if (button.id == "world_region_sort") {
-        if (counter % 2 == 0) {
-            alert(url + '&sort_by=world_region&reverse=false');
-            return url + '&sort_by=world_region&reverse=false';
-        } else {
-            return url + '&sort_by=world_region&reverse=true';
-        }
-    }  
-    if (button.id == "country_sort") {
-        if (counter % 2 == 0) {
-            return url + '&sort_by=country?reverse=false';
-        } else {
-            return url + '&sort_by=country?reverse=true';
-        }
-    }  
-    if (button.id == "language_family_sort") {
-        if (counter % 2 == 0) {
-            return url + '&sort_by=language_family?reverse=false';
-        } else {
-            return url + '&sort_by=language_family?reverse=true';
-        }
-    }  
-    if (button.id == "location_sort") {
-        if (counter % 2 == 0) {
-            return url + '&sort_by=location?reverse=false';
-        } else {
-            return url + '&sort_by=location?reverse=true';
-        }
-    }  
-    if (button.id == "community_size_sort") {
-        if (counter % 2 == 0) {
-            return url + '&sort_by=community_size&reverse=false';
-        } else {
-            return url + '&sort_by=community_size&reverse=true';
-        }
-    }        
-}
-
-function inOrder(url, button, counter) {
-    alert(button.id);
-    switch(button.id) {
-        case "language_sort":
-            if (counter % 2 == 0) {
-                return url + '?sort_by=language?reverse=false';
-            } else {
-                return url + '?sort_by=language?reverse=true';
-            }
-        case "world_region_sort":
-            alert(test2);
-            if (counter % 2 == 0) {
-                return url + '?sort_by=world_region?reverse=false';
-            } else {
-                return url + '?sort_by=world_region?reverse=true';
-            }
-        case "country_sort":
-            if (counter % 2 == 0) {
-                return url + '?sort_by=country?reverse=false';
-            } else {
-                return url + '?sort_by=country?reverse=true';
-            }
-        case "language_family_sort":
-            if (counter % 2 == 0) {
-                return url + '?sort_by=language_family?reverse=false';
-            } else {
-                return url + '?sort_by=language_family?reverse=true';
-            }
-        case "location_sort":
-            if (counter % 2 == 0) {
-                return url + '?sort_by=location?reverse=false';
-            } else {
-                return url + '?sort_by=location?reverse=true';
-            }
-        case "community_size_sort":
-            if (counter % 2 == 0) {
-                return url + '?sort_by=community_size?reverse=false';
-            } else {
-                return url + '?sort_by=community_size?reverse=true';
-            }
-    }
-}
-
-
 
 function languageSearch(){
     var dropdown = document.getElementById('dropdown');
@@ -237,6 +134,139 @@ function allSearch(){
     dropdown.innerHTML = "Search All Categories"; 
 
 }
+
+function onLanguageButtonClick() {
+    var oldUrl = url
+    if (language_counter % 2 == 0) {
+        if(oldUrl.includes('contains')) {
+            var newUrl = oldUrl + '&sort_by=language&reverse=true';
+        }
+        else {
+            var newUrl = oldUrl + '?allcontains=&sort_by=language&reverse=true';
+        }
+    }
+    else {
+        if(oldUrl.includes('contains')) {
+            var newUrl = url + '&sort_by=language&reverse=false';
+        }
+        else {
+            var newUrl = oldUrl + '?allcontains=&sort_by=language&reverse=false';
+        }
+    }
+    language_counter ++;  
+    makeTable(newUrl);   
+}
+
+function onWorldRegionButtonClick(){
+    var oldUrl = url
+    if (world_region_counter % 2 == 0) {
+        if(oldUrl.includes('contains')) {
+            var newUrl = oldUrl + '&sort_by=world_region&reverse=true';
+        }
+        else {
+            var newUrl = oldUrl + '?allcontains=&sort_by=world_region&reverse=true';
+        }
+    }
+    else {
+        if(oldUrl.includes('contains')) {
+            var newUrl = url + '&sort_by=world_region&reverse=false';
+        }
+        else {
+            var newUrl = oldUrl + '?allcontains=&sort_by=world_region&reverse=false';
+        }
+    }
+    world_region_counter ++;  
+    makeTable(newUrl);   
+}
+
+function onCountryButtonClick(){
+    var oldUrl = url
+    if (country_counter % 2 == 0) {
+        if(oldUrl.includes('contains')) {
+            var newUrl = oldUrl + '&sort_by=country&reverse=true';
+        }
+        else {
+            var newUrl = oldUrl + '?allcontains=&sort_by=country&reverse=true';
+        }
+    }
+    else {
+        if(oldUrl.includes('contains')) {
+            var newUrl = url + '&sort_by=country&reverse=false';
+        }
+        else {
+            var newUrl = oldUrl + '?allcontains=&sort_by=country&reverse=false';
+        }
+    }
+    country_counter ++;  
+    makeTable(newUrl);   
+}
+
+function onLanguageFamilyButtonClick(){
+    var oldUrl = url
+    if (language_family_counter % 2 == 0) {
+        if(oldUrl.includes('contains')) {
+            var newUrl = oldUrl + '&sort_by=language_family&reverse=true';
+        }
+        else {
+            var newUrl = oldUrl + '?allcontains=&sort_by=language_family&reverse=true';
+        }
+    }
+    else {
+        if(oldUrl.includes('contains')) {
+            var newUrl = url + '&sort_by=language_family&reverse=false';
+        }
+        else {
+            var newUrl = oldUrl + '?allcontains=&sort_by=language_family&reverse=false';
+        }
+    }
+    language_family_counter ++;  
+    makeTable(newUrl);   
+}
+
+function onLocationButtonClick(){
+    var oldUrl = url
+    if (location_counter % 2 == 0) {
+        if(oldUrl.includes('contains')) {
+            var newUrl = oldUrl + '&sort_by=location&reverse=true';
+        }
+        else {
+            var newUrl = oldUrl + '?allcontains=&sort_by=location&reverse=true';
+        }
+    }
+    else {
+        if(oldUrl.includes('contains')) {
+            var newUrl = url + '&sort_by=location&reverse=false';
+        }
+        else {
+            var newUrl = oldUrl + '?allcontains=&sort_by=location&reverse=false';
+        }
+    }
+    location_counter ++;  
+    makeTable(newUrl);   
+}
+
+function onCommunitySizeButtonClick(){
+    var oldUrl = url
+    if (community_size_counter % 2 == 0) {
+        if(oldUrl.includes('contains')) {
+            var newUrl = oldUrl + '&sort_by=community_size&reverse=true';
+        }
+        else {
+            var newUrl = oldUrl + '?allcontains=&sort_by=community_size&reverse=true';
+        }
+    }
+    else {
+        if(oldUrl.includes('contains')) {
+            var newUrl = url + '&sort_by=community_size&reverse=false';
+        }
+        else {
+            var newUrl = oldUrl + '?allcontains=&sort_by=community_size&reverse=false';
+        }
+    }
+    community_size_counter ++;  
+    makeTable(newUrl);   
+}
+
 
 // Returns the base URL of the API, onto which endpoint
 // components can be appended.

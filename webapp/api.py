@@ -43,6 +43,8 @@ def get_communities():
     location_contains = flask.request.args.get('location_contains')
     community_size_contains = flask.request.args.get('community_size_contains')
     all_contains = flask.request.args.get('all_contains')
+    sort_by = flask.request.args.get('sort_by')
+    reverse = flask.request.args.get('reverse')
     
     
     
@@ -65,28 +67,49 @@ def get_communities():
         if sort_by:
             print('test2')
             if reverse == 'true':
-                query += 'ORDER BY' + sort_by + 'DESC'
+                query += 'ORDER BY ' + sort_by + ' DESC'
             else:
-                query += 'ORDER BY' + sort_by
+                query += 'ORDER BY ' + sort_by
         else:
             query += 'ORDER BY world_region'
     
     elif country_contains:
         like_argument = '%' + country_contains + '%'
         query += 'AND countries.country ILIKE %s' 
-        query += 'ORDER BY country'
+
+        if sort_by:
+            print('test2')
+            if reverse == 'true':
+                query += 'ORDER BY ' + sort_by + ' DESC'
+            else:
+                query += 'ORDER BY ' + sort_by
+        else:
+            query += 'ORDER BY country'
         
     
     elif language_family_contains:
         like_argument = '%' + language_family_contains + '%'
         query += 'AND language_families.language_family ILIKE %s' 
-        query += 'ORDER BY language_family'
+
+        if sort_by:
+            if reverse == 'true':
+                query += 'ORDER BY ' + sort_by + ' DESC'
+            else:
+                query += 'ORDER BY ' + sort_by
+        else:
+            query += 'ORDER BY language_family'
     
    
     elif location_contains:
         like_argument = '%' + location_contains + '%'
         query += 'AND locations.location ILIKE %s' 
-        query += 'ORDER BY location'
+        if sort_by:
+            if reverse == 'true':
+                query += 'ORDER BY ' + sort_by + ' DESC'
+            else:
+                query += 'ORDER BY ' + sort_by
+        else:
+            query += 'ORDER BY location'
         
     
     elif community_size_contains:
@@ -94,39 +117,42 @@ def get_communities():
         query += 'AND communities.community_size ILIKE %s' 
         query+= 'ORDER BY language'
         
-    
-    elif all_contains:
-        print('test1')
-        like_argument = '%' + all_contains + '%'
-        query += 'AND (languages.language ILIKE %s'
-        query += 'OR world_regions.world_region ILIKE %s' 
-        query += 'OR countries.country ILIKE %s' 
-        query += 'OR language_families.language_family ILIKE %s' 
-        query += 'OR locations.location ILIKE %s' 
-        query += 'OR communities.community_size ILIKE %s)'
-        sort_by = flask.request.args.get('sort_by')
-        print(sort_by)
         if sort_by:
-            print('test2')
-            reverse = flask.request.args.get('&reverse')
             if reverse == 'true':
                 query += 'ORDER BY ' + sort_by + ' DESC'
             else:
-                print('test3')
                 query += 'ORDER BY ' + sort_by
-                print(query)
         else:
             query += 'ORDER BY language'
         
     
-    
+    elif all_contains:
+        like_argument = '%' + all_contains + '%'
+        query += ' AND (languages.language ILIKE %s'
+        query += ' OR world_regions.world_region ILIKE %s' 
+        query += ' OR countries.country ILIKE %s' 
+        query += ' OR language_families.language_family ILIKE %s' 
+        query += ' OR locations.location ILIKE %s' 
+        query += ' OR communities.community_size ILIKE %s)'
+        if sort_by:
+
+            if reverse == 'true':
+                query += 'ORDER BY ' + sort_by + ' DESC'
+            else:
+                query += 'ORDER BY ' + sort_by
+        else:
+            query += 'ORDER BY language'
+    elif sort_by:
+        print('sort by works')
+        if reverse == 'true':
+            query += 'ORDER BY ' + sort_by + ' DESC'
+        else:
+            query += 'ORDER BY ' + sort_by
     else:
         query += 'ORDER BY language'
+        print('sort by does not work')
         
          
-    
-        
-        
     
       
     community_list = []
