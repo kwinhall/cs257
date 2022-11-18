@@ -19,6 +19,11 @@ function initialize() {
     });
     dropDown();
     makeTable(url);
+    var new_url = getAPIBaseURL() + '/communities/?all_contains=ital';
+    var button = document.getElementById('world_region_sort');
+    var counter = 0;
+    test_url = realInOrder(new_url, button, counter);
+    makeTable(test_url);
 }
 
 function onSearchButton() { 
@@ -49,7 +54,9 @@ function onSearchButton() {
             var url = getAPIBaseURL() + '/communities?community_size_contains=' + search_text.value;
             break;
     }
+
     makeTable(url);
+    return url;
 }
 
 function dropDown() {
@@ -70,6 +77,124 @@ function dropDown() {
     all_search.onclick = allSearch;  
     
 }
+function sortFunction(url) {
+    var language_counter = 0;
+    var world_region_counter = 0;
+    var country_counter = 0;
+    var language_family_counter = 0;
+    var location_counter = 0;
+    var community_size_counter = 0;
+    var language_sort_button = document.getElementById('language_sort');
+    let world_region_sort_button = document.getElementById("world_region_sort");
+    var country_sort_button = document.getElementById('country_sort');
+    var language_family_sort_button = document.getElementById('language_family_sort');
+    var location_sort_button = document.getElementById('location_sort');
+    var community_size_sort_button = document.getElementById('community_size_sort'); 
+    language_sort_button.onclick = inOrder(url,language_sort_button, language_counter);
+    language_sort_button.onclick = language_counter++;
+    world_region_sort_button.onclick = inOrder(url,world_region_sort_button, world_region_counter);
+    world_region_sort_button.onclick = world_region_counter++;
+    country_sort_button.onclick = inOrder(url,country_sort_button, country_counter);
+    country_sort_button.onclick = country_counter++;
+    language_family_sort_button.onclick = inOrder(url,language_family_sort_button,language_family_counter);
+    language_family_sort_button.onclick = language_family_counter++;
+    location_sort_button.onclick = inOrder(url,location_sort_button,location_counter);
+    location_sort_button.onclick = location_counter++;
+    community_size_sort_button.onclick = inOrder(url,community_size_sort_button,community_size_counter);
+    community_size_sort_button.onclick = community_size_counter++;
+}
+
+function realInOrder(url, button, counter) {
+    alert(button.id);
+    if (button.id == "language_sort") {
+        if (counter % 2 == 0) {
+            return url + '&sort_by=language&reverse=false';
+        } else {
+            return url + '&sort_by=language&reverse=true';
+        }
+    }
+    if (button.id == "world_region_sort") {
+        if (counter % 2 == 0) {
+            alert(url + '&sort_by=world_region&reverse=false');
+            return url + '&sort_by=world_region&reverse=false';
+        } else {
+            return url + '&sort_by=world_region&reverse=true';
+        }
+    }  
+    if (button.id == "country_sort") {
+        if (counter % 2 == 0) {
+            return url + '&sort_by=country?reverse=false';
+        } else {
+            return url + '&sort_by=country?reverse=true';
+        }
+    }  
+    if (button.id == "language_family_sort") {
+        if (counter % 2 == 0) {
+            return url + '&sort_by=language_family?reverse=false';
+        } else {
+            return url + '&sort_by=language_family?reverse=true';
+        }
+    }  
+    if (button.id == "location_sort") {
+        if (counter % 2 == 0) {
+            return url + '&sort_by=location?reverse=false';
+        } else {
+            return url + '&sort_by=location?reverse=true';
+        }
+    }  
+    if (button.id == "community_size_sort") {
+        if (counter % 2 == 0) {
+            return url + '&sort_by=community_size&reverse=false';
+        } else {
+            return url + '&sort_by=community_size&reverse=true';
+        }
+    }        
+}
+
+function inOrder(url, button, counter) {
+    alert(button.id);
+    switch(button.id) {
+        case "language_sort":
+            if (counter % 2 == 0) {
+                return url + '?sort_by=language?reverse=false';
+            } else {
+                return url + '?sort_by=language?reverse=true';
+            }
+        case "world_region_sort":
+            alert(test2);
+            if (counter % 2 == 0) {
+                return url + '?sort_by=world_region?reverse=false';
+            } else {
+                return url + '?sort_by=world_region?reverse=true';
+            }
+        case "country_sort":
+            if (counter % 2 == 0) {
+                return url + '?sort_by=country?reverse=false';
+            } else {
+                return url + '?sort_by=country?reverse=true';
+            }
+        case "language_family_sort":
+            if (counter % 2 == 0) {
+                return url + '?sort_by=language_family?reverse=false';
+            } else {
+                return url + '?sort_by=language_family?reverse=true';
+            }
+        case "location_sort":
+            if (counter % 2 == 0) {
+                return url + '?sort_by=location?reverse=false';
+            } else {
+                return url + '?sort_by=location?reverse=true';
+            }
+        case "community_size_sort":
+            if (counter % 2 == 0) {
+                return url + '?sort_by=community_size?reverse=false';
+            } else {
+                return url + '?sort_by=community_size?reverse=true';
+            }
+    }
+}
+
+
 
 function languageSearch(){
     var dropdown = document.getElementById('dropdown');

@@ -33,46 +33,70 @@ def get_communities():
                AND language_families.id = communities.language_family_id
                AND locations.id = communities.location_id
                '''  
-    like_argument = ''         
+    like_argument = ''   
+    
     
     language_contains = flask.request.args.get('language_contains')
+    world_region_contains = flask.request.args.get('world_region_contains')
+    country_contains = flask.request.args.get('country_contains')
+    language_family_contains = flask.request.args.get('language_family_contains')
+    location_contains = flask.request.args.get('location_contains')
+    community_size_contains = flask.request.args.get('community_size_contains')
+    all_contains = flask.request.args.get('all_contains')
+    
+    
+    
+
     if language_contains:
         like_argument = '%' + language_contains + '%'
         query += 'AND languages.language ILIKE %s' 
-        query += 'ORDER BY language'
+        if sort_by:
+            if reverse == 'true':
+                query += 'ORDER BY ' + sort_by + ' DESC'
+            else:
+                query += 'ORDER BY ' + sort_by
+        else:
+            query += 'ORDER BY language'
         
-    world_region_contains = flask.request.args.get('world_region_contains')
-    if world_region_contains:
+    elif world_region_contains:
         like_argument = '%' + world_region_contains + '%'
         query += 'AND world_regions.world_region ILIKE %s' 
-        query += 'ORDER BY world_region'
+
+        if sort_by:
+            print('test2')
+            if reverse == 'true':
+                query += 'ORDER BY' + sort_by + 'DESC'
+            else:
+                query += 'ORDER BY' + sort_by
+        else:
+            query += 'ORDER BY world_region'
     
-    country_contains = flask.request.args.get('country_contains')
-    if country_contains:
+    elif country_contains:
         like_argument = '%' + country_contains + '%'
         query += 'AND countries.country ILIKE %s' 
         query += 'ORDER BY country'
         
-    language_family_contains = flask.request.args.get('language_family_contains')
-    if language_family_contains:
+    
+    elif language_family_contains:
         like_argument = '%' + language_family_contains + '%'
         query += 'AND language_families.language_family ILIKE %s' 
         query += 'ORDER BY language_family'
     
-    location_contains = flask.request.args.get('location_contains')
-    if location_contains:
+   
+    elif location_contains:
         like_argument = '%' + location_contains + '%'
         query += 'AND locations.location ILIKE %s' 
         query += 'ORDER BY location'
         
-    community_size_contains = flask.request.args.get('community_size_contains')
-    if community_size_contains:
+    
+    elif community_size_contains:
         like_argument = '%' + community_size_contains + '%'
         query += 'AND communities.community_size ILIKE %s' 
         query+= 'ORDER BY language'
         
-    all_contains = flask.request.args.get('all_contains')
-    if all_contains:
+    
+    elif all_contains:
+        print('test1')
         like_argument = '%' + all_contains + '%'
         query += 'AND (languages.language ILIKE %s'
         query += 'OR world_regions.world_region ILIKE %s' 
@@ -80,8 +104,30 @@ def get_communities():
         query += 'OR language_families.language_family ILIKE %s' 
         query += 'OR locations.location ILIKE %s' 
         query += 'OR communities.community_size ILIKE %s)'
+        sort_by = flask.request.args.get('sort_by')
+        print(sort_by)
+        if sort_by:
+            print('test2')
+            reverse = flask.request.args.get('&reverse')
+            if reverse == 'true':
+                query += 'ORDER BY ' + sort_by + ' DESC'
+            else:
+                print('test3')
+                query += 'ORDER BY ' + sort_by
+                print(query)
+        else:
+            query += 'ORDER BY language'
         
-
+    
+    
+    else:
+        query += 'ORDER BY language'
+        
+         
+    
+        
+        
+    
       
     community_list = []
     
