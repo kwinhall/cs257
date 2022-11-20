@@ -77,8 +77,7 @@ def get_communities():
             else:
                 query += 'ORDER BY ' + sort_by
         else:
-            query += 'ORDER BY country'
-        
+            query += 'ORDER BY country'    
     
     elif language_family_contains:
         like_argument = '%' + language_family_contains + '%'
@@ -92,7 +91,6 @@ def get_communities():
         else:
             query += 'ORDER BY language_family'
     
-   
     elif location_contains:
         like_argument = '%' + location_contains + '%'
         query += 'AND locations.location ILIKE %s' 
@@ -102,8 +100,7 @@ def get_communities():
             else:
                 query += 'ORDER BY ' + sort_by
         else:
-            query += 'ORDER BY location'
-        
+            query += 'ORDER BY location'    
     
     elif community_size_contains:
         like_argument = '%' + community_size_contains + '%'
@@ -116,7 +113,6 @@ def get_communities():
         else:
             query += 'ORDER BY language'
         
-    
     elif all_contains:
         like_argument = '%' + all_contains + '%'
         query += ' AND (languages.language ILIKE %s'
@@ -125,25 +121,27 @@ def get_communities():
         query += ' OR language_families.language_family ILIKE %s' 
         query += ' OR locations.location ILIKE %s' 
         query += ' OR communities.community_size ILIKE %s)'
-        if sort_by:
 
+        if sort_by:
             if reverse == 'true':
                 query += 'ORDER BY ' + sort_by + ' DESC'
             else:
                 query += 'ORDER BY ' + sort_by
         else:
             query += 'ORDER BY language'
+
     elif sort_by:
         if reverse == 'true':
             query += 'ORDER BY ' + sort_by + ' DESC'
         else:
             query += 'ORDER BY ' + sort_by
+
     else:
         query += 'ORDER BY language'
         
     community_list = []
     
-    if all_contains:
+    if all_contains: #if the user is searching through all categories, there are multiple like arguments
         try:
             community_list = []
             connection = get_connection()
@@ -163,8 +161,7 @@ def get_communities():
             print(e, file=sys.stderr)
         return json.dumps(community_list)  
         
-    else:
-        
+    else: #if the user is not searching through all categories, there is one like argument
         try:
             connection = get_connection()
             cursor = connection.cursor()

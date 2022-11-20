@@ -1,6 +1,12 @@
 Khizar Qureshi and Kendra Winhall
 
 REQUEST:
+/help
+
+REPONSE: shows the api design text file. 
+
+
+REQUEST:
 /communities
 
 RESPONSE: a JSON list of dictionaries, each of which represents one language community sorted
@@ -14,14 +20,10 @@ alphabetically by language. Each dictionary in this list will have the following
 
 EXAMPLE:
     /communities
-        [{"language":"Abazza", "world_region":"Western Asia", "country":"Turkey,Russia", "language_family":"Abkhaz-Adyge", "location":"Wayne(NJ)", "community_size":"Smallest"},
+        [{"language":"Abaza", "world_region":"Western Asia", "country":"Turkey,Russia", "language_family":"Abkhaz-Adyge", "location":"Wayne(NJ)", "community_size":"Smallest"},
         {"language":"Abruzzese", "world_region":"Southern Europe", "country":"Italy", "language_family":"Indo-European", "location":"Astoria", "community_size":"Small"}
         {"language":"Abruzzese", "world_region":"Southern Europe", "country":"Italy", "language_family":"Indo-European", "location":"Litle Italy", "community_size":"Small"}
         ...]
-
-REQUEST:
-/help
-Response: shows the api design text file. 
 
 REQUEST:
 /communities/?all_contains={search_text}
@@ -39,10 +41,9 @@ by the size of each community alphabetically by each language. Each dictionary i
     location -- (TEXT) the region in NYC where the language community is 
     community_size -- (TEXT) the size of the community in the region in NYC
 
-
 EXAMPLE:
     /communities/?all_contains=ab
-        [{"language":"Abazza", "world_region":"Western Asia", "country":"Turkey,Russia", "language_family":"Abkhaz-Adyge", "location":"Wayne(NJ)", "community_size":"Smallest"},
+        [{"language":"Abaza", "world_region":"Western Asia", "country":"Turkey,Russia", "language_family":"Abkhaz-Adyge", "location":"Wayne(NJ)", "community_size":"Smallest"},
         {"language":"Abruzzese", "world_region":"Southern Europe", "country":"Italy", "language_family":"Indo-European", "location":"Astoria", "community_size":"Small"}
         {"language":"Abruzzese", "world_region":"Southern Europe", "country":"Italy", "language_family":"Indo-European", "location":"Litle Italy", "community_size":"Small"}
         ...]
@@ -66,7 +67,7 @@ alphabetically by language. Each dictionary in this list will have the following
 
 EXAMPLE:
     /communities/?language_contains=ab
-        [{"language":"Abazza", "world_region":"Western Asia", "country":"Turkey,Russia", "language_family":"Abkhaz-Adyge", "location":"Wayne(NJ)", "community_size":"Smallest"},
+        [{"language":"Abaza", "world_region":"Western Asia", "country":"Turkey,Russia", "language_family":"Abkhaz-Adyge", "location":"Wayne(NJ)", "community_size":"Smallest"},
         {"language":"Abruzzese", "world_region":"Southern Europe", "country":"Italy", "language_family":"Indo-European", "location":"Astoria", "community_size":"Small"}
         {"language":"Abruzzese", "world_region":"Southern Europe", "country":"Italy", "language_family":"Indo-European", "location":"Litle Italy", "community_size":"Small"}
         ...]
@@ -186,3 +187,40 @@ EXAMPLE:
         {"language":"American Sign Language", "world_region":"Northern America", "country":"United States", "language_family":null, "location":"Jackson Heights", "community_size":"Large"}
         ...]
 
+
+REQUEST:
+/communities/?all_contains=&sort_by=<category>&reverse=<true/false>
+
+GET parameters:
+    category -- what category to sort by
+    reverse -- true or false
+
+RESPONSE: returns a JSON list of dictionaries of all the data sorted by the given category and order determined by whether 'reverse' is true or false
+
+EXAMPLE:
+    /communities/?allcontains=&sort_by=language&reverse=true
+        [{"language":"Ü-Tsang Tibetan", "world_region":"Eastern Asia", "country":"China,India", "language_family":"Sino-Tibetan", "location":"Jackson Heights", "community_size":"Medium"},
+        {"language":"Zuwara", "world_region":"Northern Africa", "country":"Libya", "language_family":"Afro-Asiatic", "location":"Hollis", "community_size":"Largest"}
+        {"language":"Zulu", "world_region":"Northern Africa", "country":"South Africa, Lesotho", "language_family":"Atlantic-Congo", "location":"Edenwald", "community_size":"Largest"}
+        ...]
+
+
+REQUEST:
+/communities/?<category1>_contains={search_text}&sort_by=<category2>&reverse=<true/false>
+
+GET parameter:
+    category1 -- what category to search
+    search_text -- returns entries in the given category who contain search_text along with all the
+    other corresponding data with the language community, case-insentive. 
+    category2 -- what category to sort by
+    reverse -- true or false
+    
+RESPONSE: returns a JSON list of dictionaries of the data that contains the given search text in the given category,
+sorted by the given category and order determined by whether 'reverse' is true or false
+
+EXAMPLE:
+    /communities/?language_contains=ab&sort_by=language&reverse=false
+        [{"language":"Abaza", "world_region":"Western Asia", "country":"Turkey,Russia", "language_family":"Abkhaz-Adyge", "location":"Wayne(NJ)", "community_size":"Smallest"},
+        {"language":"Abruzzese", "world_region":"Southern Europe", "country":"Italy", "language_family":"Indo-European", "location":"Astoria", "community_size":"Small"}
+        {"language":"Abruzzese", "world_region":"Southern Europe", "country":"Italy", "language_family":"Indo-European", "location":"Litle Italy", "community_size":"Small"}
+        ...]
