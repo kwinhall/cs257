@@ -1,5 +1,5 @@
 AUTHORS: Kendra Winhall & Khizar Qureshi
-DATA: This dataset contains over 1200 langauge communities in NYC. If you want to download this data file, go to https://languagemap.nyc/Data and click the export button on the top right.
+DATA: This dataset contains over 1200 language communities in NYC. If you want to download this data file, go to https://languagemap.nyc/Data and click the export button on the top right.
 Copyright Info: Data is licensed under the ODbL license
 
 FEATURES:
