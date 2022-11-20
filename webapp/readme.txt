@@ -15,3 +15,6 @@ FEATURES:
 -Search by Community Size
 -Sorting buttons for every category in the table 
 -api/help route
+
+Note: 
+Sign Language has no language family, so the language family field is empty, which is represented in our table. 
