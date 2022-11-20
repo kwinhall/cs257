@@ -1,7 +1,7 @@
 /*
 Khizar Qureshi and Kendra Winhall
 webapp.js
-For Web application:first draft due 14th November 2022
+For web application final project due 21 November 2022
 */
 
 window.onload = initialize;
@@ -13,8 +13,9 @@ language_family_counter = 0;
 location_counter = 0;
 community_size_counter = 0;
 
-
-
+/*
+initializes the webapp by filling the table with all the language communities.
+*/
 function initialize() {
     url = getAPIBaseURL() + '/communities/';
     var search_button = document.getElementById('search_button');
@@ -27,6 +28,7 @@ function initialize() {
     });
     dropDown();
     makeTable(url);
+
     var language_sort_button = document.getElementById('language_sort');
     var world_region_sort_button = document.getElementById("world_region_sort");
     var country_sort_button = document.getElementById('country_sort');
@@ -39,8 +41,11 @@ function initialize() {
     language_family_sort_button.onclick = onLanguageFamilyButtonClick;
     location_sort_button.onclick = onLocationButtonClick;
     community_size_sort_button.onclick = onCommunitySizeButtonClick;
-
 }
+
+/*
+When user presses search button, function gets the category from drop down and creates a URL with the get parameters & creates the table
+*/
 
 function onSearchButton() { 
     var dropdown = document.getElementById('dropdown');
@@ -70,10 +75,11 @@ function onSearchButton() {
             url = getAPIBaseURL() + '/communities?community_size_contains=' + search_text.value;
             break;
     }
-
     makeTable(url);
 }
-
+/*
+When the user clicks a dropdown category, calls another function to change the label of the button to match the category the user clicked
+*/
 function dropDown() {
     var language_search = document.getElementById('language_search');
     var world_region_search = document.getElementById('world_region_search');
@@ -90,7 +96,6 @@ function dropDown() {
     location_search.onclick = locationSearch;
     community_size_search.onclick = communitySizeSearch;
     all_search.onclick = allSearch;  
-    
 }
 
 function languageSearch(){
@@ -134,7 +139,9 @@ function allSearch(){
     dropdown.innerHTML = "Search All Categories"; 
 
 }
-
+/*
+When the user clicks the reverse language button on the table, this function reverses the data by language
+*/
 function onLanguageButtonClick() {
     var oldUrl = url
     if (language_counter % 2 == 0) {
@@ -153,10 +160,13 @@ function onLanguageButtonClick() {
             var newUrl = oldUrl + '?allcontains=&sort_by=language&reverse=false';
         }
     }
-    language_counter ++;  
+    language_counter++;  
     makeTable(newUrl);   
 }
 
+/*
+When the user clicks the reverse world region button on the table, this function reverses the data by world region
+*/
 function onWorldRegionButtonClick(){
     var oldUrl = url
     if (world_region_counter % 2 == 0) {
@@ -175,10 +185,13 @@ function onWorldRegionButtonClick(){
             var newUrl = oldUrl + '?allcontains=&sort_by=world_region&reverse=false';
         }
     }
-    world_region_counter ++;  
+    world_region_counter++;  
     makeTable(newUrl);   
 }
 
+/*
+When the user clicks the reverse country button on the table, this function reverses the data by country
+*/
 function onCountryButtonClick(){
     var oldUrl = url
     if (country_counter % 2 == 0) {
@@ -197,10 +210,13 @@ function onCountryButtonClick(){
             var newUrl = oldUrl + '?allcontains=&sort_by=country&reverse=false';
         }
     }
-    country_counter ++;  
+    country_counter++;  
     makeTable(newUrl);   
 }
 
+/*
+When the user clicks the reverse language family button on the table, this function reverses the data by language family
+*/
 function onLanguageFamilyButtonClick(){
     var oldUrl = url
     if (language_family_counter % 2 == 0) {
@@ -219,10 +235,13 @@ function onLanguageFamilyButtonClick(){
             var newUrl = oldUrl + '?allcontains=&sort_by=language_family&reverse=false';
         }
     }
-    language_family_counter ++;  
+    language_family_counter++;  
     makeTable(newUrl);   
 }
 
+/*
+When the user clicks the reverse location button on the table, this function reverses the data by location
+*/
 function onLocationButtonClick(){
     var oldUrl = url
     if (location_counter % 2 == 0) {
@@ -241,10 +260,13 @@ function onLocationButtonClick(){
             var newUrl = oldUrl + '?allcontains=&sort_by=location&reverse=false';
         }
     }
-    location_counter ++;  
+    location_counter++;  
     makeTable(newUrl);   
 }
 
+/*
+When the user clicks the reverse community size button on the table, this function reverses the data in alphabetical order
+*/
 function onCommunitySizeButtonClick(){
     var oldUrl = url
     if (community_size_counter % 2 == 0) {
@@ -263,7 +285,7 @@ function onCommunitySizeButtonClick(){
             var newUrl = oldUrl + '?allcontains=&sort_by=community_size&reverse=false';
         }
     }
-    community_size_counter ++;  
+    community_size_counter++;  
     makeTable(newUrl);   
 }
 
@@ -278,6 +300,9 @@ function getAPIBaseURL() {
     return baseURL;
 }
 
+/*
+ * Creates the table based on the url using the JSON dictionaries
+ */
 function makeTable(url) { 
     // Send the request to the books API /authors/ endpoint
     fetch(url, {method: 'get'})
@@ -307,12 +332,10 @@ function makeTable(url) {
         }
     })
 
-
     // Once you have your list of communities dictionaries, use it to build
     // an HTML table displaying the communities .
     // Log the error if anything went wrong during the fetch.
     .catch(function(error) {
         console.log(error);
     });
-    
 }

@@ -1,7 +1,7 @@
 '''
 app.py
 Khizar Qureshi and Kendra Winhall
-For Web application:first draft due 14th November 2022
+For Web application: final draft due 21st November 2022
 Flask application to support NYC language community web application.
 '''
 import flask

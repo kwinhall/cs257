@@ -1,7 +1,7 @@
 '''
 Khizar Qureshi and Kendra Winhall
 convert.py
-For first draft assignment due 14 November 2022
+For final project due 21 November 2022
 Download source data from https://languagemap.nyc/Data
 '''
 

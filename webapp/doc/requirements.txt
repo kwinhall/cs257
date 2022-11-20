@@ -1,6 +1,6 @@
 By Khizar Qureshi and Kendra Winhall
 
-This dataset contains over 700 languages spoken in New York City. In the dataset, each language has their original world region, country, number of global speakers, the language’s linguistic family, location in NYC, size of language-speaking community, and status (i.e, residential, community, revival). In order to download the data, go to https://languagemap.nyc/Data and click the export button on the top right.
+This dataset contains over 700 languages spoken in New York City. In the dataset, each language has their original world region, country, the language family, location in NYC, size of language-speaking community. In order to download the data, go to https://languagemap.nyc/Data and click the export button on the top right.
 
 User stories:
 STORY - A Korean speaker is considering moving to New York City. They want to know where Korean-speaking communities are in and around NYC.
